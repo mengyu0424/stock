@@ -1,0 +1,54 @@
+﻿
+/*基础增删改*/
+1、无入参
+string sql = "delect from 表名 where 条件=条件";
+int row = OracleDbHelper.ExecuteNonQuery(sql);
+2、有入参
+string sql = "INSERT INTO 表名(ID,NAME) VALUES(:ID,:NAME)";
+OracleParameter[] pms = {
+    new OracleParameter(":ID", 1),
+    new OracleParameter(":NAME", "测试")
+};
+int row = OracleDbHelper.ExecuteNonQuery(sql, pms);
+
+/*查询方法*/
+string sql = "SELECT * FROM SYS_USER WHERE USER_ID = :USER_ID";
+OracleParameter[] pms = {
+    new OracleParameter(":USER_ID", 1001)
+};
+DataTable dt = OracleDbHelper.ExecuteQuery(sql, pms);
+
+/*执行存储过程*/
+OracleParameter[] pms = {
+    new OracleParameter(":P_ID", 1),
+    new OracleParameter(":P_RESULT", OracleDbType.Int32, ParameterDirection.Output)
+};
+OracleDbHelper.ExecuteProcedure("PROC_TEST", pms);
+
+/*批量增删改*/
+var list = new List<string>
+{
+    "INSERT INTO TEST VALUES(1,'A')",
+    "UPDATE TEST SET NAME='B' WHERE ID=1",
+    "DELETE FROM TEST WHERE ID=2"
+};
+int count = OracleDbHelper.BatchExecuteNonQuery(list);
+
+/*批量带参增删改*/
+var list = new List<(string Sql, OracleParameter[] Params)>();
+
+list.Add(("INSERT INTO TEST(ID,NAME) VALUES(:ID,:NAME)", 
+    new OracleParameter[] { new OracleParameter(":ID", 1), new OracleParameter(":NAME", "测试1") }));
+
+list.Add(("UPDATE TEST SET NAME=:NAME WHERE ID=:ID", 
+    new OracleParameter[] { new OracleParameter(":ID", 1), new OracleParameter(":NAME", "更新") }));
+
+int count = OracleDbHelper.BatchExecuteNonQuery(list);
+
+/*批量执行存储*/
+var procList = new List<(string ProcName, OracleParameter[] Params)>();
+
+procList.Add(("PROC_INSERT", new OracleParameter[] { new OracleParameter(":ID", 1) }));
+procList.Add(("PROC_UPDATE", new OracleParameter[] { new OracleParameter(":ID", 1) }));
+
+OracleDbHelper.BatchExecuteProcedure(procList);
