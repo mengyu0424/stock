@@ -27,7 +27,6 @@ namespace WindowsFormsApp.主窗体
             // 核心：嵌入父窗体
             this.TopLevel = false;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Dock = DockStyle.Fill;
 
             // 👇 关键：关闭自动DPI缩放，解决设计器抖动问题
             this.AutoScaleMode = AutoScaleMode.None;
