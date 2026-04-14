@@ -20,7 +20,6 @@ namespace WindowsFormsApp.维护功能
         {
             InitializeComponent();
             init();
-            dgv_fatherMenu.DataSource = FatherMenuLoad();
         }
         private void init() {
             //加载机构数据
@@ -29,22 +28,20 @@ namespace WindowsFormsApp.维护功能
             cmb_Org.ValueMember = "CODE";
             cmb_Org.SelectedValue = GlobalInfo.userInfo.orgCode;
             cmb_Org.Enabled= false;//暂时机构就一个，不允许修改
+            //页面加载菜单数据
+            DataTable menuData = GetMenuData();
+            dgvMenuList.DataSource = menuData;
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            Clear();
-            cmb_fatherMenu.DataSource= FatherMenuLoad();
-            cmb_fatherMenu.DisplayMember = "NAME";
-            cmb_fatherMenu.ValueMember = "CODE";
-            cmb_fatherMenu.SelectedValue = "";
-            cmb_fatherMenu.Enabled = true;
-            menuCode.Text = GetMenuCode();
-            menuName.Enabled = true;
-            menuPath.Enabled = true;
-            menuSxh.Enabled = true;
-            menuFlag.Enabled = true;
-            menuFlag.SelectedValue = "启用";
+            MenuEdit menuEdit = new MenuEdit("Add", cmb_Org.SelectedValue?.ToString(), null);
+            menuEdit.ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
@@ -54,26 +51,18 @@ namespace WindowsFormsApp.维护功能
 
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
-            Clear();
-            dgv_menu.DataSource = null;
-            dgv_fatherMenu.DataSource = FatherMenuLoad();
+            dgvMenuList.DataSource = null;
+            DataTable menuData = GetMenuData();
+            dgvMenuList.DataSource = menuData;
         }
 
-
-        private void Clear() 
-        {
-            cmb_fatherMenu.Enabled = false;
-            cmb_fatherMenu.SelectedValue = "";
-            menuCode.Enabled = false;
-            menuCode.Text = "";
-            menuName.Enabled = false;
-            menuName.Text = "";
-            menuPath.Enabled = false;
-            menuPath.Text = "";
-            menuSxh.Enabled = false;
-            menuSxh.Text = "";
-            menuFlag.Enabled = false;
-            menuFlag.SelectedValue = "";
+        private DataTable GetMenuData() {
+            string sql = string.Format(@"select m.fathercode,n.name fathername,m.code,m.name,m.pym,m.menulevel,m.flag,m.path,m.orgcode,o.name orgname,m.sxh,nvl(n.sxh,m.sxh) as fathersxh from code_menu m
+                                                                left join code_menu n on m.fathercode=n.code and m.orgcode=n.orgcode
+                                                                left join code_org o on m.orgcode=o.code
+                                                                where m.orgcode='{0}'
+                                                                order by nvl(n.sxh,m.sxh),m.menulevel,m.sxh ", cmb_Org.SelectedValue.ToString());
+            return OracleDbHelper.ExecuteQuery(sql);
         }
         private DataTable FatherMenuLoad() {
             string sql = string.Format(@"select t.code,t.name,t.pym,t.sxh,case when t.flag=1 then '启用' else '禁用' end as flag from code_menu t 
@@ -91,27 +80,8 @@ namespace WindowsFormsApp.维护功能
         {
             if (e.RowIndex >= 0)
             {
-                var row = dgv_fatherMenu.Rows[e.RowIndex];
-                cmb_fatherMenu.DataSource = FatherMenuLoad();
-                cmb_fatherMenu.DisplayMember = "NAME";
-                cmb_fatherMenu.ValueMember = "CODE";
-                if (!string.IsNullOrEmpty(row.Cells["CODE"].Value.ToString()))
-                {
-                    cmb_fatherMenu.SelectedValue = row.Cells["CODE"].Value.ToString();
-                }
-                else
-                {
-                    cmb_fatherMenu.SelectedValue = "";
-                }
-                cmb_fatherMenu.Enabled = true;
-                menuCode.Text = GetMenuCode();
-                menuName.Enabled = true;
-                menuPath.Enabled = true;
-                menuSxh.Enabled = true;
-                menuFlag.Enabled = true;
-                menuFlag.SelectedValue = "启用";
+               
             }
         }
-
     }
 }

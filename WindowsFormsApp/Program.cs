@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using WindowsFormsApp.主窗体;
+using WindowsFormsApp.测试菜单;
 using WindowsFormsApp.登录;
 
 namespace WindowsFormsApp
@@ -18,6 +19,7 @@ namespace WindowsFormsApp
             {
                 Application.Run(new MainForm(GlobalInfo.userInfo.Name));
             }
+            
         }
     }
 }

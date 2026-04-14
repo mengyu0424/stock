@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -129,11 +130,23 @@
     <Compile Include="测试菜单\cshtml3.Designer.cs">
       <DependentUpon>cshtml3.cs</DependentUpon>
     </Compile>
+    <Compile Include="测试菜单\MessageWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="测试菜单\MessageWin.Designer.cs">
+      <DependentUpon>MessageWin.cs</DependentUpon>
+    </Compile>
     <Compile Include="登录\登陆页面.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="登录\登陆页面.Designer.cs">
       <DependentUpon>登陆页面.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护功能\MenuEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\MenuEdit.Designer.cs">
+      <DependentUpon>MenuEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="维护功能\MenuSetting.cs">
       <SubType>Form</SubType>
@@ -154,11 +167,17 @@
     <EmbeddedResource Include="主窗体\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="测试菜单\MessageWin.resx">
+      <DependentUpon>MessageWin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="登录\登陆页面.resx">
       <DependentUpon>登陆页面.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="登录\登陆页面.zh-CN.resx">
       <DependentUpon>登陆页面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\MenuEdit.resx">
+      <DependentUpon>MenuEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="维护功能\MenuSetting.resx">
       <DependentUpon>MenuSetting.cs</DependentUpon>
