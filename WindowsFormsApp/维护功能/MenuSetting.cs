@@ -1,14 +1,7 @@
 ﻿using ClassHelper;
 using ClassLibrary;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp.主窗体;
 
@@ -21,13 +14,15 @@ namespace WindowsFormsApp.维护功能
             InitializeComponent();
             init();
         }
-        private void init() {
+
+        private void init()
+        {
             //加载机构数据
             cmb_Org.DataSource = GlobalInfo.orgData;
             cmb_Org.DisplayMember = "NAME";
             cmb_Org.ValueMember = "CODE";
             cmb_Org.SelectedValue = GlobalInfo.userInfo.orgCode;
-            cmb_Org.Enabled= false;//暂时机构就一个，不允许修改
+            cmb_Org.Enabled = false;//暂时机构就一个，不允许修改
             //页面加载菜单数据
             DataTable menuData = GetMenuData();
             dgvMenuList.DataSource = menuData;
@@ -41,12 +36,10 @@ namespace WindowsFormsApp.维护功能
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -56,7 +49,8 @@ namespace WindowsFormsApp.维护功能
             dgvMenuList.DataSource = menuData;
         }
 
-        private DataTable GetMenuData() {
+        private DataTable GetMenuData()
+        {
             string sql = string.Format(@"select m.fathercode,n.name fathername,m.code,m.name,m.pym,m.menulevel,m.flag,m.path,m.orgcode,o.name orgname,m.sxh,nvl(n.sxh,m.sxh) as fathersxh from code_menu m
                                                                 left join code_menu n on m.fathercode=n.code and m.orgcode=n.orgcode
                                                                 left join code_org o on m.orgcode=o.code
@@ -64,13 +58,16 @@ namespace WindowsFormsApp.维护功能
                                                                 order by nvl(n.sxh,m.sxh),m.menulevel,m.sxh ", cmb_Org.SelectedValue.ToString());
             return OracleDbHelper.ExecuteQuery(sql);
         }
-        private DataTable FatherMenuLoad() {
-            string sql = string.Format(@"select t.code,t.name,t.pym,t.sxh,case when t.flag=1 then '启用' else '禁用' end as flag from code_menu t 
+
+        private DataTable FatherMenuLoad()
+        {
+            string sql = string.Format(@"select t.code,t.name,t.pym,t.sxh,case when t.flag=1 then '启用' else '禁用' end as flag from code_menu t
                                                                 where t.orgcode='{0}'
                                                                 and t.menulevel=0 order by t.sxh asc", cmb_Org.SelectedValue.ToString());
             return OracleDbHelper.ExecuteQuery(sql);
         }
-        private string GetMenuCode() 
+
+        private string GetMenuCode()
         {
             string sql = string.Format(@" select max(code)+1 as code from code_menu where orgcode='{0}' ", cmb_Org.SelectedValue.ToString());
             return OracleDbHelper.ExecuteScalar(sql).ToString();
@@ -80,7 +77,6 @@ namespace WindowsFormsApp.维护功能
         {
             if (e.RowIndex >= 0)
             {
-               
             }
         }
     }

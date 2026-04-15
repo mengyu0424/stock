@@ -1,8 +1,8 @@
-﻿using System;
-using System.Data;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
-using Oracle.ManagedDataAccess.Client;
 using System.Configuration;
+using System.Data;
 
 namespace ClassHelper
 {
@@ -12,6 +12,7 @@ namespace ClassHelper
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["OracleConn"].ConnectionString;
 
         #region 查询
+
         /// <summary>
         /// 查询语句（不带参数）
         /// </summary>
@@ -21,6 +22,7 @@ namespace ClassHelper
         {
             return ExecuteQuery(sql, null);
         }
+
         /// <summary>
         /// 查询语句（带参数）
         /// </summary>
@@ -52,6 +54,7 @@ namespace ClassHelper
                 }
             }
         }
+
         /// <summary>
         /// 查询语句 返回第一行第一列的值（不带参数）
         /// </summary>
@@ -59,6 +62,7 @@ namespace ClassHelper
         {
             return ExecuteScalar(sql, null);
         }
+
         /// <summary>
         /// 查询语句 返回第一行第一列的值（带参数）
         /// </summary>
@@ -91,9 +95,11 @@ namespace ClassHelper
                 }
             }
         }
-        #endregion
+
+        #endregion 查询
 
         #region 增删改
+
         /// <summary>
         /// 增删改执行语句 返回执行行数（不带参数）
         /// </summary>
@@ -103,6 +109,7 @@ namespace ClassHelper
         {
             return ExecuteNonQuery(sql, null);
         }
+
         /// <summary>
         /// 增删改执行语句 返回执行行数（带参数）
         /// </summary>
@@ -129,6 +136,7 @@ namespace ClassHelper
                 }
             }
         }
+
         /// <summary>
         /// 批量执行增删改语句（不带参数）
         /// </summary>
@@ -166,6 +174,7 @@ namespace ClassHelper
                 }
             }
         }
+
         /// <summary>
         /// 批量执行增删改语句（带参数）
         /// </summary>
@@ -204,9 +213,11 @@ namespace ClassHelper
                 }
             }
         }
-        #endregion
+
+        #endregion 增删改
 
         #region 执行存储
+
         /// <summary>
         /// 执行一个存储过程，返回受影响行数
         /// </summary>
@@ -234,6 +245,7 @@ namespace ClassHelper
                 }
             }
         }
+
         /// <summary>
         /// 批量执行存储过程
         /// </summary>
@@ -273,6 +285,7 @@ namespace ClassHelper
                 }
             }
         }
-        #endregion
+
+        #endregion 执行存储
     }
 }

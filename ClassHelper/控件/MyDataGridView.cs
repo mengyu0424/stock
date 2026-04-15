@@ -1,6 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+
 [ToolboxBitmap(typeof(DataGridView))]
 public class MyDataGridView : DataGridView
 {

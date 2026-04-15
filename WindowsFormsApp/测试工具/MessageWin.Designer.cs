@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp.测试菜单
+﻿namespace WindowsFormsApp.测试工具
 {
     partial class MessageWin
     {
@@ -43,25 +43,25 @@
             // 
             this.timeNumber.Location = new System.Drawing.Point(108, 9);
             this.timeNumber.Name = "timeNumber";
-            this.timeNumber.Size = new System.Drawing.Size(433, 21);
+            this.timeNumber.Size = new System.Drawing.Size(433, 23);
             this.timeNumber.TabIndex = 8;
-            this.timeNumber.Text = "5000";
+            this.timeNumber.Text = "5";
             // 
             // txtSql
             // 
             this.txtSql.Location = new System.Drawing.Point(108, 56);
             this.txtSql.Name = "txtSql";
-            this.txtSql.Size = new System.Drawing.Size(433, 21);
+            this.txtSql.Size = new System.Drawing.Size(433, 23);
             this.txtSql.TabIndex = 9;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 107);
+            this.label1.Location = new System.Drawing.Point(12, 93);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(485, 12);
+            this.label1.Size = new System.Drawing.Size(545, 17);
             this.label1.TabIndex = 11;
-            this.label1.Text = "sql语句使用分号分隔；停止灰的，开始绿色，出现数据红色，sql语句请使用count(1)查询";
+            this.label1.Text = "sql语句使用分号分隔；停止灰的，开始绿色，出现数据红色，报错黑色，sql语句请使用count(1)查询";
             // 
             // txtnum
             // 
@@ -70,9 +70,9 @@
             this.txtnum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtnum.Location = new System.Drawing.Point(45, 143);
             this.txtnum.Name = "txtnum";
-            this.txtnum.Size = new System.Drawing.Size(19, 21);
+            this.txtnum.Size = new System.Drawing.Size(17, 21);
             this.txtnum.TabIndex = 10;
-            this.txtnum.Text = "0";
+            this.txtnum.Text = "-";
             // 
             // myButton2
             // 
@@ -81,7 +81,7 @@
             this.myButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.myButton2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myButton2.ForeColor = System.Drawing.Color.White;
-            this.myButton2.Location = new System.Drawing.Point(446, 141);
+            this.myButton2.Location = new System.Drawing.Point(466, 141);
             this.myButton2.Name = "myButton2";
             this.myButton2.Size = new System.Drawing.Size(75, 23);
             this.myButton2.TabIndex = 7;
@@ -104,7 +104,7 @@
             this.myButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.myButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myButton1.ForeColor = System.Drawing.Color.White;
-            this.myButton1.Location = new System.Drawing.Point(330, 143);
+            this.myButton1.Location = new System.Drawing.Point(385, 140);
             this.myButton1.Name = "myButton1";
             this.myButton1.Size = new System.Drawing.Size(75, 23);
             this.myButton1.TabIndex = 5;
@@ -128,15 +128,15 @@
             this.myLabel1.AutoSize = true;
             this.myLabel1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel1.Location = new System.Drawing.Point(12, 9);
+            this.myLabel1.Location = new System.Drawing.Point(28, 9);
             this.myLabel1.Name = "myLabel1";
-            this.myLabel1.Size = new System.Drawing.Size(90, 21);
+            this.myLabel1.Size = new System.Drawing.Size(74, 21);
             this.myLabel1.TabIndex = 1;
-            this.myLabel1.Text = "延迟毫秒：";
+            this.myLabel1.Text = "延迟秒：";
             // 
             // MessageWin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 450);
             this.Controls.Add(this.label1);

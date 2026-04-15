@@ -23,7 +23,6 @@ public class MyComboBox : ComboBox
         DrawBorder(e.Graphics, Focused ? _focus : _border);
     }
 
-
     private void DrawBorder(Graphics g, Color color)
     {
         g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -44,8 +43,11 @@ public class MyComboBox : ComboBox
             sel ? Color.White : ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
     }
 
-    protected override void OnGotFocus(EventArgs e) { Invalidate(); base.OnGotFocus(e); }
-    protected override void OnLostFocus(EventArgs e) { Invalidate(); base.OnLostFocus(e); }
+    protected override void OnGotFocus(EventArgs e)
+    { Invalidate(); base.OnGotFocus(e); }
+
+    protected override void OnLostFocus(EventArgs e)
+    { Invalidate(); base.OnLostFocus(e); }
 
     protected override void WndProc(ref Message m)
     {

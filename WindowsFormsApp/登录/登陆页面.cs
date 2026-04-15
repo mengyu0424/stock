@@ -2,22 +2,18 @@
 using ClassLibrary;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp.Other;
-using WindowsFormsApp.主窗体;
 
 namespace WindowsFormsApp.登录
 {
     public partial class 登录页面 : Form
     {
         private string csbz = ConfigurationManager.AppSettings["csbz"];
+
         public 登录页面()
         {
             InitializeComponent();
@@ -29,11 +25,12 @@ namespace WindowsFormsApp.登录
             this.KeyPreview = true;
             this.KeyDown += 登录页面_KeyDown;
         }
+
         private void Init()
         {
-            if (csbz=="1")
+            if (csbz == "1")
             {
-                cmbOrg.DataSource= new List<dynamic> { new { CODE = "000000", NAME = "梦屿库存管理测试" } };
+                cmbOrg.DataSource = new List<dynamic> { new { CODE = "000000", NAME = "梦屿库存管理测试" } };
                 cmbOrg.DisplayMember = "NAME";
                 cmbOrg.ValueMember = "CODE";
             }
@@ -44,7 +41,6 @@ namespace WindowsFormsApp.登录
                 cmbOrg.DisplayMember = "NAME";
                 cmbOrg.ValueMember = "CODE";
             }
-                
         }
 
         /// <summary>
@@ -65,22 +61,8 @@ namespace WindowsFormsApp.登录
         {
             string user = txtUsername.Text.Trim();
             string pwd = txtPassword.Text.Trim();
-            string orgCode= cmbOrg.SelectedValue.ToString();
+            string orgCode = cmbOrg.SelectedValue.ToString();
             string orgName = cmbOrg.Text;
-
-            /*测试使用 账号0  密码1*/
-            if (csbz=="1" && user=="0" && pwd=="1")
-            {
-                //登陆成功 全局变量赋值
-                GlobalInfo.userInfo.ID = "0000";
-                GlobalInfo.userInfo.Name = "梦屿库存管理员";
-                GlobalInfo.userInfo.orgCode = orgCode;
-                GlobalInfo.userInfo.orgName = orgName;
-                //打开菜单页面 关闭登陆页面
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                return;
-            }
 
             // 优化判断
             if (string.IsNullOrWhiteSpace(user))
@@ -93,41 +75,65 @@ namespace WindowsFormsApp.登录
                 txtPassword.Focus();
                 return;
             }
-            string sql = string.Format(" select t.code,t.name,t.pass,t.orgcode,t.flag from code_czydm t where t.code='{0}' and t.orgcode='{1}' ", user, orgCode);
-            DataTable dt= OracleDbHelper.ExecuteQuery(sql);
-            if (dt.Rows.Count<=0)
+
+            if (csbz == "1")
             {
-                MessageBox.Show("未查询到账号【"+ user + "】，请确认后重新尝试！");
-                txtUsername.Clear();
-                txtUsername.Focus();
-                txtPassword.Clear();
-                return;
+                /*测试使用 账号0  密码1*/
+                if (user == "0" && pwd == "1")
+                {
+                    //登陆成功 全局变量赋值
+                    GlobalInfo.userInfo.ID = "0000";
+                    GlobalInfo.userInfo.Name = "梦屿库存管理员";
+                    GlobalInfo.userInfo.orgCode = orgCode;
+                    GlobalInfo.userInfo.orgName = orgName;
+                    //打开菜单页面 关闭登陆页面
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("账号密码错误!");
+                }
             }
-            DataRow dr=dt.Rows[0];
-            if (dr["FLAG"]?.ToString() != "1")
+            else
             {
-                MessageBox.Show("账号【" + user + "】已被禁用！");
-                txtUsername.Clear();
-                txtUsername.Focus();
-                txtPassword.Clear();
-                return;
+                string sql = string.Format(" select t.code,t.name,t.pass,t.orgcode,t.flag from code_czydm t where t.code='{0}' and t.orgcode='{1}' ", user, orgCode);
+                DataTable dt = OracleDbHelper.ExecuteQuery(sql);
+                if (dt.Rows.Count <= 0)
+                {
+                    MessageBox.Show("未查询到账号【" + user + "】，请确认后重新尝试！");
+                    txtUsername.Clear();
+                    txtUsername.Focus();
+                    txtPassword.Clear();
+                    return;
+                }
+                DataRow dr = dt.Rows[0];
+                if (dr["FLAG"]?.ToString() != "1")
+                {
+                    MessageBox.Show("账号【" + user + "】已被禁用！");
+                    txtUsername.Clear();
+                    txtUsername.Focus();
+                    txtPassword.Clear();
+                    return;
+                }
+                string md5Pwd = PublicFun.ToMD5(pwd);
+                if (dr["PASS"]?.ToString().ToLower() != md5Pwd.ToLower())
+                {
+                    MessageBox.Show("密码错误，请重新输入！");
+                    txtPassword.Clear();
+                    txtPassword.Focus();
+                    return;
+                }
+                //登陆成功 全局变量赋值
+                GlobalInfo.userInfo.ID = dr["CODE"].ToString();
+                GlobalInfo.userInfo.Name = dr["NAME"].ToString();
+                GlobalInfo.userInfo.orgCode = dr["ORGCODE"].ToString();
+                GlobalInfo.userInfo.orgName = orgName;
+                //打开菜单页面 关闭登陆页面
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            string md5Pwd = PublicFun.ToMD5(pwd);
-            if (dr["PASS"]?.ToString().ToLower()!= md5Pwd.ToLower())
-            {
-                MessageBox.Show("密码错误，请重新输入！");
-                txtPassword.Clear();
-                txtPassword.Focus();
-                return;
-            }
-            //登陆成功 全局变量赋值
-            GlobalInfo.userInfo.ID = dr["CODE"].ToString();
-            GlobalInfo.userInfo.Name = dr["NAME"].ToString();
-            GlobalInfo.userInfo.orgCode = dr["ORGCODE"].ToString();
-            GlobalInfo.userInfo.orgName = orgName;
-            //打开菜单页面 关闭登陆页面
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -141,10 +147,14 @@ namespace WindowsFormsApp.登录
         }
 
         #region 数据访问
-        private DataTable LoadGetOrg() {
+
+        private DataTable LoadGetOrg()
+        {
             string sql = " select t.code,t.name,t.pym,t.flag from code_org t where t.flag='1' ";
-            DataTable dt= OracleDbHelper.ExecuteQuery(sql);
+            DataTable dt = OracleDbHelper.ExecuteQuery(sql);
+
             #region 登录将机构数据加载到全局变量，后续页面需要使用，避免重复查询数据库
+
             GlobalInfo.orgData = dt.AsEnumerable().Select(r => new OrgData
             {
                 CODE = r["CODE"].ToString(),
@@ -152,10 +162,12 @@ namespace WindowsFormsApp.登录
                 PYM = r["PYM"].ToString(),
                 FLAG = r["FLAG"].ToString()
             }).ToList();
-            #endregion
+
+            #endregion 登录将机构数据加载到全局变量，后续页面需要使用，避免重复查询数据库
 
             return dt;
         }
-        #endregion
+
+        #endregion 数据访问
     }
 }

@@ -1,15 +1,15 @@
 ﻿using ClassHelper;
 using System;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using WindowsFormsApp.主窗体;
 
-namespace WindowsFormsApp.测试菜单
+namespace WindowsFormsApp.测试工具
 {
-    public partial class MessageWin : Form
+    public partial class MessageWin : BasePopupForm
     {
         public MessageWin()
         {
@@ -17,6 +17,7 @@ namespace WindowsFormsApp.测试菜单
         }
 
         private int flag = 0;
+
         // 用后台线程安全延时，不卡界面、不跨线程崩溃
         private void myButton1_Click(object sender, EventArgs e)
         {
@@ -28,7 +29,7 @@ namespace WindowsFormsApp.测试菜单
             var sqlList = sql.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < sqlList.Length; i++)
             {
-                StartThread(sqlList[i],int.Parse(timeNumber.Text));
+                StartThread(sqlList[i], (int.Parse(timeNumber.Text) * 1000));
             }
         }
 
@@ -46,7 +47,7 @@ namespace WindowsFormsApp.测试菜单
             Thread thread = new Thread(() =>
             {
                 // 死循环执行（后台）
-                while (flag==1)
+                while (flag == 1)
                 {
                     this.Invoke(new Action(() =>
                     {
@@ -55,10 +56,18 @@ namespace WindowsFormsApp.测试菜单
                     // ✅ 必须用 Invoke 才能安全修改界面
                     this.Invoke(new Action(() =>
                     {
-                        int result =int.Parse( OracleDbHelper.ExecuteScalar(sql).ToString());
-                        if (result>0)
+                        try
                         {
-                            flagPanel.BackColor = Color.Red;
+                            int result = int.Parse(OracleDbHelper.ExecuteScalar(sql).ToString());
+                            if (result > 0)
+                            {
+                                flagPanel.BackColor = Color.Red;
+                                ShowToTop(this);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            flagPanel.BackColor = Color.Black;
                         }
                     }));
 
@@ -71,6 +80,41 @@ namespace WindowsFormsApp.测试菜单
             };
 
             thread.Start();
+        }
+
+        #region 窗体置顶
+
+        // 调用 Windows API 实现窗体置顶
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private const int SW_RESTORE = 9;
+
+        public static void ShowToTop(Form form)
+        {
+            if (form == null || form.IsDisposed) return;
+
+            // 如果窗体被最小化，先恢复
+            if (form.WindowState == FormWindowState.Minimized)
+            {
+                ShowWindow(form.Handle, SW_RESTORE);
+            }
+
+            // 强制激活并置顶窗体
+            form.Activate();
+            form.TopMost = true;  // 临时置顶
+            form.TopMost = false; // 取消永久置顶（只显示一次在最前）
+            SetForegroundWindow(form.Handle);
+        }
+
+        #endregion 窗体置顶
+
+        private void myButton3_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

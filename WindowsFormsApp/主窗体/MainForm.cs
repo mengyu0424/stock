@@ -4,11 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp.主窗体
 {
@@ -35,7 +33,7 @@ namespace WindowsFormsApp.主窗体
 
         private void LoadMenuData()
         {
-            if (csbz=="1")
+            if (csbz == "1")
             {
                 menuDT = new DataTable();
                 menuDT.Columns.Add("FATHERCODE", typeof(string));   // 对应FatherID
@@ -52,7 +50,10 @@ namespace WindowsFormsApp.主窗体
                 menuDT.Rows.Add("1", "分类一", 1, "102", "菜单2", "WindowsFormsApp.测试菜单.cshtml2", 3);
                 // 分类二（FatherID=2，TypeName=分类二）
                 menuDT.Rows.Add("2", "分类二", 2, "201", "菜单3", "WindowsFormsApp.测试菜单.cshtml3", 2);
-                menuDT.Rows.Add("2", "分类二", 2, "202", "长名称测试菜单", "WindowsFormsApp测试菜单.cshtml1", 4);
+                menuDT.Rows.Add("2", "分类二", 2, "202", "长名称测试菜单", "WindowsFormsApp.测试菜单.cshtml1", 4);
+                menuDT.Rows.Add("2", "分类二", 2, "203", "错误菜单测试", "WindowsFormsApp测试菜单.cshtml1", 5);
+                //分类三（FatherID=3，TypeName=分类三）
+                menuDT.Rows.Add("3", "分类三", 2, "301", "小工具", "WindowsFormsApp.测试菜单.小工具", 0);
             }
             else
             {
@@ -63,7 +64,7 @@ namespace WindowsFormsApp.主窗体
                                                                     left join code_menu e on d.fathercode=e.code and d.orgcode=e.orgcode and e.menulevel=0
                                                                     where a.code='{0}'
                                                                     and e.flag=1/*此处是筛选分类菜单关闭 则全部不显示*/
-                                                                    and a.orgcode='{1}' ", GlobalInfo.userInfo.ID,GlobalInfo.userInfo.orgCode);
+                                                                    and a.orgcode='{1}' ", GlobalInfo.userInfo.ID, GlobalInfo.userInfo.orgCode);
                 menuDT = OracleDbHelper.ExecuteQuery(sql);
             }
         }
@@ -92,7 +93,7 @@ namespace WindowsFormsApp.主窗体
                         Path = row.IsNull("PATH") ? string.Empty : row["PATH"].ToString(),
                         Sxh = row.IsNull("SXH") ? 0 : Convert.ToInt32(row["SXH"])
                     })
-                    .OrderBy(o => o.Sxh) 
+                    .OrderBy(o => o.Sxh)
                     .ToList();
 
                 TreeNode categoryNode = new TreeNode(fatherItem.FatherName.ToString());

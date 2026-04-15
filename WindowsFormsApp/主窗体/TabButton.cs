@@ -11,6 +11,7 @@ namespace WindowsFormsApp.主窗体
         private bool isSelected;
 
         public event EventHandler<EventArgs> CloseClick;
+
         public event EventHandler<EventArgs> TabSelected;
 
         public string TabText
@@ -74,7 +75,7 @@ namespace WindowsFormsApp.主窗体
             this.Controls.Add(btnClose);
 
             this.Resize += (s, e) => LayoutControls();
-            this.BorderStyle= BorderStyle.Fixed3D;
+            this.BorderStyle = BorderStyle.Fixed3D;
             LayoutControls();
         }
 

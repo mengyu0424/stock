@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp.主窗体
@@ -14,6 +8,7 @@ namespace WindowsFormsApp.主窗体
     {
         // 最小尺寸保护（低分屏不会挤变形）
         private const int MIN_FORM_WIDTH = 800;
+
         private const int MIN_FORM_HEIGHT = 450;
 
         public BaseForm()
@@ -80,6 +75,11 @@ namespace WindowsFormsApp.主窗体
             this.BackColor = Color.White;
             this.Font = new Font("微软雅黑", 9F);
             this.ForeColor = Color.FromArgb(51, 51, 51);
+            //窗体边框
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;//禁止最大化
+            this.MinimizeBox = false;//禁止最小化
+            this.ControlBox = true; // 显示右上角关闭按钮
 
             // 防闪烁
             this.DoubleBuffered = true;
@@ -91,6 +91,7 @@ namespace WindowsFormsApp.主窗体
         }
 
         #region 小弹窗必备：可拖动（点哪里都能拖动）
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -101,9 +102,11 @@ namespace WindowsFormsApp.主窗体
                 this.WndProc(ref msg);
             }
         }
-        #endregion
+
+        #endregion 小弹窗必备：可拖动（点哪里都能拖动）
 
         #region 安全释放
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -116,6 +119,7 @@ namespace WindowsFormsApp.主窗体
             }
             base.Dispose(disposing);
         }
-        #endregion
+
+        #endregion 安全释放
     }
 }
