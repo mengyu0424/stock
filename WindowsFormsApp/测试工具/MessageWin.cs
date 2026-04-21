@@ -68,6 +68,7 @@ namespace WindowsFormsApp.测试工具
                         catch (Exception)
                         {
                             flagPanel.BackColor = Color.Black;
+                            ShowToTop(this);
                         }
                     }));
 

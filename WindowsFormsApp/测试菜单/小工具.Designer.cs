@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.myButton1 = new MyButton();
+            this.btn_redis = new MyButton();
             this.SuspendLayout();
             // 
             // myButton1
             // 
+            this.myButton1.AccessibleDescription = "";
+            this.myButton1.AccessibleName = "";
             this.myButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.myButton1.FlatAppearance.BorderSize = 0;
             this.myButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -46,11 +49,27 @@
             this.myButton1.UseVisualStyleBackColor = true;
             this.myButton1.Click += new System.EventHandler(this.myButton1_Click);
             // 
+            // btn_redis
+            // 
+            this.btn_redis.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_redis.FlatAppearance.BorderSize = 0;
+            this.btn_redis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_redis.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_redis.ForeColor = System.Drawing.Color.White;
+            this.btn_redis.Location = new System.Drawing.Point(13, 76);
+            this.btn_redis.Name = "btn_redis";
+            this.btn_redis.Size = new System.Drawing.Size(168, 35);
+            this.btn_redis.TabIndex = 1;
+            this.btn_redis.Text = "数据库查询检测";
+            this.btn_redis.UseVisualStyleBackColor = true;
+            this.btn_redis.Click += new System.EventHandler(this.btn_redis_Click);
+            // 
             // 小工具
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_redis);
             this.Controls.Add(this.myButton1);
             this.Name = "小工具";
             this.Text = "小工具";
@@ -61,5 +80,6 @@
         #endregion
 
         private MyButton myButton1;
+        private MyButton btn_redis;
     }
 }

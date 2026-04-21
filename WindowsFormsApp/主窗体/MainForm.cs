@@ -66,6 +66,7 @@ namespace WindowsFormsApp.主窗体
                                                                     and e.flag=1/*此处是筛选分类菜单关闭 则全部不显示*/
                                                                     and a.orgcode='{1}' ", GlobalInfo.userInfo.ID, GlobalInfo.userInfo.orgCode);
                 menuDT = OracleDbHelper.ExecuteQuery(sql);
+                menuDT.Rows.Add("999", "工具", 2, "301", "小工具集合", "WindowsFormsApp.测试菜单.小工具", 0);
             }
         }
 

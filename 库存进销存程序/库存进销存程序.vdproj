@@ -117,12 +117,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2CE5361CA8A44278A42CE14275644456"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5DF6E2B54F39F577A761D3EDC8CDD78F"
         "OwnerKey" = "8:_9C956778F8DFCA6AEE844DF4030EC6DA"
         "MsmSig" = "8:_UNDEFINED"
@@ -340,13 +334,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E906805A8A1915D83492DD36789C020B"
+        "OwnerKey" = "8:_06D5BDC695F904BB495A9186D0D06DC1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_06D5BDC695F904BB495A9186D0D06DC1"
+        "OwnerKey" = "8:_E906805A8A1915D83492DD36789C020B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -718,26 +712,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CE5361CA8A44278A42CE14275644456"
-            {
-            "SourcePath" = "8:C:\\Windows\\System32\\msiexec.exe"
-            "TargetName" = "8:msiexec.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_F1D24BF22A50451FB85256FD19C21029"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5DF6E2B54F39F577A761D3EDC8CDD78F"
@@ -1157,12 +1131,12 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:梦屿库存管理系统"
-        "ProductCode" = "8:{1992BC04-548E-456A-8FA8-7A5B445A7499}"
-        "PackageCode" = "8:{2695901D-51A3-473A-BB72-1697B50CF00B}"
+        "ProductCode" = "8:{2AB199DB-01FE-4A39-8FF7-6DE42FA99497}"
+        "PackageCode" = "8:{071EFE34-E2F1-41A8-9AAD-23308C7C5153}"
         "UpgradeCode" = "8:{FD63F0FC-2AC2-41D5-8B4C-E35A33E26447}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
@@ -1278,20 +1252,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4EC5E32E49D74F028857EECD04D950C5"
-            {
-            "Name" = "8:卸载梦屿库存管理程序"
-            "Arguments" = "8:/x [ProductCode]"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_2CE5361CA8A44278A42CE14275644456"
-            "Folder" = "8:_C26D28FFA6374BA898FAA2E88F75B939"
-            "WorkingFolder" = "8:_F1D24BF22A50451FB85256FD19C21029"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8D633C4636B7426F98DADF6F21271810"
             {
             "Name" = "8:梦屿库存管理系统"

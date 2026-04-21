@@ -15,5 +15,11 @@ namespace WindowsFormsApp.测试菜单
             WindowsFormsApp.测试工具.MessageWin messageWin = new WindowsFormsApp.测试工具.MessageWin();
             messageWin.Show();
         }
+
+        private void btn_redis_Click(object sender, EventArgs e)
+        {
+            WindowsFormsApp.测试工具.RedisLoginWin redisWin = new WindowsFormsApp.测试工具.RedisLoginWin();
+            redisWin.Show();
+        }
     }
 }
