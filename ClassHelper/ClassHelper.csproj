@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.cs" />
     <Compile Include="GraphicsExtension.cs" />
     <Compile Include="OracleDbHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DbHelper使用说明.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{6953ffee-2791-4dd5-b07d-1820ab07429f}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
