@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Data; // 必须加这个
 
 public class MyComboBox : ComboBox
 {
@@ -73,7 +74,22 @@ public class MyComboBox : ComboBox
         using (Brush br = new SolidBrush(backColor))
             e.Graphics.FillRectangle(br, e.Bounds);
 
-        TextRenderer.DrawText(e.Graphics, Items[e.Index].ToString(), Font, e.Bounds,
+        // ===================== 修复核心代码 =====================
+        object item = Items[e.Index];
+        string text = "";
+
+        // 如果绑定了 DataTable，自动取 DisplayMember
+        if (!string.IsNullOrEmpty(this.DisplayMember) && item is DataRowView)
+        {
+            text = ((DataRowView)item)[this.DisplayMember].ToString();
+        }
+        else
+        {
+            text = item.ToString();
+        }
+        // =========================================================
+
+        TextRenderer.DrawText(e.Graphics, text, Font, e.Bounds,
             textColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
     }
 
