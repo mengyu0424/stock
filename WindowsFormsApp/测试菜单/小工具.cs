@@ -21,5 +21,11 @@ namespace WindowsFormsApp.测试菜单
             WindowsFormsApp.测试工具.RedisLoginWin redisWin = new WindowsFormsApp.测试工具.RedisLoginWin();
             redisWin.Show();
         }
+
+        private void btn_Lottery_Click(object sender, EventArgs e)
+        {
+            WindowsFormsApp.测试工具.LotteryForm lotteryForm = new WindowsFormsApp.测试工具.LotteryForm();
+            lotteryForm.Show();
+        }
     }
 }

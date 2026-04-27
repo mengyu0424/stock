@@ -125,6 +125,12 @@
     <Compile Include="主窗体\TabButton.Designer.cs">
       <DependentUpon>TabButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="测试工具\LotteryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="测试工具\LotteryForm.Designer.cs">
+      <DependentUpon>LotteryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="测试工具\MessageWin.cs">
       <SubType>Form</SubType>
     </Compile>

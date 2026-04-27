@@ -30,12 +30,14 @@ namespace WindowsFormsApp.维护功能
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            MenuEdit menuEdit = new MenuEdit("Add", cmb_Org.SelectedValue?.ToString(), null);
+            MenuEdit menuEdit = new MenuEdit("Add", null);
             menuEdit.ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            MenuEdit menuEdit = new MenuEdit("Edit", null);
+            menuEdit.ShowDialog();
         }
 
         private void btn_Save_Click(object sender, EventArgs e)

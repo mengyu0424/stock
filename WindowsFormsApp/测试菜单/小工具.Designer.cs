@@ -30,6 +30,7 @@
         {
             this.myButton1 = new MyButton();
             this.btn_redis = new MyButton();
+            this.btn_Lottery = new MyButton();
             this.SuspendLayout();
             // 
             // myButton1
@@ -64,11 +65,29 @@
             this.btn_redis.UseVisualStyleBackColor = true;
             this.btn_redis.Click += new System.EventHandler(this.btn_redis_Click);
             // 
+            // btn_Lottery
+            // 
+            this.btn_Lottery.AccessibleDescription = "";
+            this.btn_Lottery.AccessibleName = "";
+            this.btn_Lottery.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Lottery.FlatAppearance.BorderSize = 0;
+            this.btn_Lottery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Lottery.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_Lottery.ForeColor = System.Drawing.Color.White;
+            this.btn_Lottery.Location = new System.Drawing.Point(203, 13);
+            this.btn_Lottery.Name = "btn_Lottery";
+            this.btn_Lottery.Size = new System.Drawing.Size(168, 35);
+            this.btn_Lottery.TabIndex = 2;
+            this.btn_Lottery.Text = "大转盘";
+            this.btn_Lottery.UseVisualStyleBackColor = true;
+            this.btn_Lottery.Click += new System.EventHandler(this.btn_Lottery_Click);
+            // 
             // 小工具
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_Lottery);
             this.Controls.Add(this.btn_redis);
             this.Controls.Add(this.myButton1);
             this.Name = "小工具";
@@ -81,5 +100,6 @@
 
         private MyButton myButton1;
         private MyButton btn_redis;
+        private MyButton btn_Lottery;
     }
 }

@@ -80,6 +80,7 @@
             // txtPym
             // 
             this.txtPym.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPym.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtPym.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtPym.Location = new System.Drawing.Point(368, 146);
             this.txtPym.Name = "txtPym";
@@ -89,6 +90,7 @@
             // txtSxh
             // 
             this.txtSxh.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSxh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtSxh.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtSxh.Location = new System.Drawing.Point(368, 186);
             this.txtSxh.Name = "txtSxh";
@@ -98,6 +100,7 @@
             // myTextBox3
             // 
             this.myTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.myTextBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.myTextBox3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myTextBox3.Location = new System.Drawing.Point(108, 225);
             this.myTextBox3.Name = "myTextBox3";
@@ -106,6 +109,7 @@
             // 
             // cmbFlag
             // 
+            this.cmbFlag.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbFlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbFlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFlag.Font = new System.Drawing.Font("微软雅黑", 12F);
@@ -119,6 +123,7 @@
             // txtMenuName
             // 
             this.txtMenuName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMenuName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtMenuName.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtMenuName.Location = new System.Drawing.Point(108, 145);
             this.txtMenuName.Name = "txtMenuName";
@@ -128,6 +133,7 @@
             // txtMenuCode
             // 
             this.txtMenuCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMenuCode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtMenuCode.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtMenuCode.Location = new System.Drawing.Point(108, 105);
             this.txtMenuCode.Name = "txtMenuCode";
@@ -136,6 +142,7 @@
             // 
             // cmbFatherMenu
             // 
+            this.cmbFatherMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbFatherMenu.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbFatherMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFatherMenu.Font = new System.Drawing.Font("微软雅黑", 12F);
@@ -149,9 +156,10 @@
             // cmbOrg
             // 
             this.cmbOrg.BackColor = System.Drawing.Color.White;
+            this.cmbOrg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbOrg.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbOrg.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.cmbOrg.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cmbOrg.FormattingEnabled = true;
             this.cmbOrg.ItemHeight = 28;
             this.cmbOrg.Location = new System.Drawing.Point(108, 13);
