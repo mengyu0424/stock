@@ -65,6 +65,7 @@
             this.groupBox1.Controls.Add(this.btn_Refresh);
             this.groupBox1.Controls.Add(this.btn_Save);
             this.groupBox1.Controls.Add(this.btn_Add);
+            this.groupBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(139)))), ((int)(((byte)(243)))));
@@ -139,6 +140,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvMenuList);
+            this.groupBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(139)))), ((int)(((byte)(243)))));
@@ -182,6 +184,8 @@
             this.ORGNAME,
             this.SXH,
             this.FATHERSXH});
+            this.dgvMenuList.ConvertValueData = "flag:1-启用*0-停用;";
+            this.dgvMenuList.ConvertValueFlag = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F);
@@ -305,6 +309,7 @@
             // 
             // cmb_Org
             // 
+            this.cmb_Org.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmb_Org.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmb_Org.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmb_Org.Font = new System.Drawing.Font("微软雅黑", 9F);
@@ -320,6 +325,7 @@
             // 
             this.groupBox2.Controls.Add(this.cmb_Org);
             this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(139)))), ((int)(((byte)(243)))));

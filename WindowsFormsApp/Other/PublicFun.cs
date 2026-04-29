@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using TinyPinyin;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 
 namespace WindowsFormsApp.Other
@@ -29,5 +31,19 @@ namespace WindowsFormsApp.Other
                 return sb.ToString();
             }
         }
+        #region 获取拼音码首字母
+        public static string GetPinyin(string input)
+        {
+            if (input.Trim().Length>0)
+            {
+                return PinyinHelper.GetPinyinInitials(input.Trim()).ToUpper();
+            }
+            else
+            {
+                return "";
+            }
+            
+        }
+        #endregion
     }
 }

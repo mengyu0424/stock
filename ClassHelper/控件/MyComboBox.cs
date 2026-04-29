@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using System.Data; // 必须加这个
 
@@ -23,6 +26,44 @@ public class MyComboBox : ComboBox
         ItemHeight = 28;
         FlatStyle = FlatStyle.Flat;
         Cursor = Cursors.Hand;
+
+        // 固定下拉显示高度 + 滚动条
+        this.DropDownHeight = 200;
+        this.IntegralHeight = false;
+
+        // 开启检索
+        this.DropDownStyle = ComboBoxStyle.DropDown;
+        this.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        this.AutoCompleteSource = AutoCompleteSource.ListItems;
+    }
+
+    // 绑定数据自动加空行
+    public new object DataSource
+    {
+        get => base.DataSource;
+        set
+        {
+            if (value == null)
+            {
+                base.DataSource = null;
+                return;
+            }
+
+            if (value is DataTable dt)
+            {
+                DataTable newDt = dt.Copy();
+                DataRow row = newDt.NewRow();
+                foreach (DataColumn col in newDt.Columns)
+                    row[col] = DBNull.Value;
+
+                newDt.Rows.InsertAt(row, 0);
+                base.DataSource = newDt;
+            }
+            else
+            {
+                base.DataSource = value;
+            }
+        }
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -104,5 +145,22 @@ public class MyComboBox : ComboBox
         base.WndProc(ref m);
         if (m.Msg == 0xF || m.Msg == 0x133)
             DrawBorder(CreateGraphics(), GetCurrentColor());
+    }
+}
+
+// 必须加这个扩展方法
+public static class ControlExtensions
+{
+    public static void DrawRoundedRectangle(this Graphics g, Pen p, float x, float y, float w, float h, float r)
+    {
+        using (GraphicsPath path = new GraphicsPath())
+        {
+            path.AddArc(x, y, r, r, 180, 90);
+            path.AddArc(x + w - r, y, r, r, 270, 90);
+            path.AddArc(x + w - r, y + h - r, r, r, 0, 90);
+            path.AddArc(x, y + h - r, r, r, 90, 90);
+            path.CloseAllFigures();
+            g.DrawPath(p, path);
+        }
     }
 }

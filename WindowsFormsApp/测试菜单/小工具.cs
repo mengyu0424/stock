@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using WindowsFormsApp.主窗体;
 
 namespace WindowsFormsApp.测试菜单

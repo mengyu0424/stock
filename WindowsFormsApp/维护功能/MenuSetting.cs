@@ -21,8 +21,8 @@ namespace WindowsFormsApp.维护功能
             cmb_Org.DataSource = GlobalInfo.orgData;
             cmb_Org.DisplayMember = "NAME";
             cmb_Org.ValueMember = "CODE";
-            cmb_Org.SelectedValue = GlobalInfo.userInfo.orgCode;
             cmb_Org.Enabled = false;//暂时机构就一个，不允许修改
+            cmb_Org.SelectedValue = GlobalInfo.userInfo.orgCode;
             //页面加载菜单数据
             DataTable menuData = GetMenuData();
             dgvMenuList.DataSource = menuData;
@@ -31,17 +31,44 @@ namespace WindowsFormsApp.维护功能
         private void btn_Add_Click(object sender, EventArgs e)
         {
             MenuEdit menuEdit = new MenuEdit("Add", null);
+            menuEdit.Text = "新增菜单";
             menuEdit.ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            MenuEdit menuEdit = new MenuEdit("Edit", null);
+            var data = dgvMenuList.SelectedRows;
+            DataTable dt=new DataTable();
+            dt.Columns.Add("orgCode",typeof(string));
+            dt.Columns.Add("fatherCode", typeof(string));
+            dt.Columns.Add("menuCode", typeof(string));
+            dt.Columns.Add("menuName", typeof(string));
+            dt.Columns.Add("pym", typeof(string));
+            dt.Columns.Add("flag", typeof(string));
+            dt.Columns.Add("sxh", typeof(string));
+            dt.Columns.Add("path", typeof(string));
+            dt.Columns.Add("menulevel", typeof(string));
+
+            DataRow dr=dt.NewRow();
+            dr["orgCode"] = data[0].Cells["ORGCODE"].Value.ToString();
+            dr["fatherCode"] = data[0].Cells["FATHERCODE"].Value.ToString();
+            dr["menuCode"] = data[0].Cells["CODE"].Value.ToString();
+            dr["menuName"] = data[0].Cells["NAME"].Value.ToString();
+            dr["pym"] = data[0].Cells["PYM"].Value.ToString();
+            dr["flag"] = data[0].Cells["FLAG"].Value.ToString();
+            dr["sxh"] = data[0].Cells["SXH"].Value.ToString();
+            dr["path"] = data[0].Cells["PATH"].Value.ToString();
+            dr["menulevel"] = data[0].Cells["MENULEVEL"].Value.ToString(); 
+            dt.Rows.Add(dr);
+
+            MenuEdit menuEdit = new MenuEdit("Edit", dt);
+            menuEdit.Text = "修改菜单";
             menuEdit.ShowDialog();
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)

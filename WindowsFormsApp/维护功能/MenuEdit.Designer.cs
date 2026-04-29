@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuEdit));
             this.myPanel1 = new MyPanel();
             this.txtPym = new MyTextBox();
             this.txtSxh = new MyTextBox();
-            this.myTextBox3 = new MyTextBox();
+            this.txt_url = new MyTextBox();
             this.cmbFlag = new MyComboBox();
             this.txtMenuName = new MyTextBox();
             this.txtMenuCode = new MyTextBox();
@@ -45,9 +46,9 @@
             this.myLabel3 = new MyLabel();
             this.myLabel2 = new MyLabel();
             this.myLabel1 = new MyLabel();
-            this.myButton1 = new MyButton();
+            this.btn_save = new MyButton();
             this.myPanel2 = new MyPanel();
-            this.myButton2 = new MyButton();
+            this.btn_close = new MyButton();
             this.myPanel1.SuspendLayout();
             this.myPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +58,7 @@
             this.myPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.myPanel1.Controls.Add(this.txtPym);
             this.myPanel1.Controls.Add(this.txtSxh);
-            this.myPanel1.Controls.Add(this.myTextBox3);
+            this.myPanel1.Controls.Add(this.txt_url);
             this.myPanel1.Controls.Add(this.cmbFlag);
             this.myPanel1.Controls.Add(this.txtMenuName);
             this.myPanel1.Controls.Add(this.txtMenuCode);
@@ -81,31 +82,32 @@
             // 
             this.txtPym.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPym.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtPym.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtPym.Location = new System.Drawing.Point(368, 146);
+            this.txtPym.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.txtPym.Location = new System.Drawing.Point(368, 142);
             this.txtPym.Name = "txtPym";
-            this.txtPym.Size = new System.Drawing.Size(100, 22);
+            this.txtPym.Size = new System.Drawing.Size(100, 27);
             this.txtPym.TabIndex = 15;
             // 
             // txtSxh
             // 
             this.txtSxh.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSxh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtSxh.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtSxh.Location = new System.Drawing.Point(368, 186);
+            this.txtSxh.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.txtSxh.Location = new System.Drawing.Point(368, 182);
             this.txtSxh.Name = "txtSxh";
-            this.txtSxh.Size = new System.Drawing.Size(100, 22);
+            this.txtSxh.Size = new System.Drawing.Size(100, 27);
             this.txtSxh.TabIndex = 14;
+            this.txtSxh.Text = "1";
             // 
-            // myTextBox3
+            // txt_url
             // 
-            this.myTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.myTextBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.myTextBox3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.myTextBox3.Location = new System.Drawing.Point(108, 225);
-            this.myTextBox3.Name = "myTextBox3";
-            this.myTextBox3.Size = new System.Drawing.Size(344, 22);
-            this.myTextBox3.TabIndex = 13;
+            this.txt_url.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_url.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txt_url.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.txt_url.Location = new System.Drawing.Point(106, 222);
+            this.txt_url.Name = "txt_url";
+            this.txt_url.Size = new System.Drawing.Size(344, 27);
+            this.txt_url.TabIndex = 13;
             // 
             // cmbFlag
             // 
@@ -115,29 +117,35 @@
             this.cmbFlag.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cmbFlag.FormattingEnabled = true;
             this.cmbFlag.ItemHeight = 28;
-            this.cmbFlag.Location = new System.Drawing.Point(108, 173);
+            this.cmbFlag.Items.AddRange(new object[] {
+            "启用",
+            "禁用"});
+            this.cmbFlag.Location = new System.Drawing.Point(108, 178);
             this.cmbFlag.Name = "cmbFlag";
             this.cmbFlag.Size = new System.Drawing.Size(165, 34);
             this.cmbFlag.TabIndex = 12;
+            this.cmbFlag.Text = "启用";
             // 
             // txtMenuName
             // 
             this.txtMenuName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMenuName.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtMenuName.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtMenuName.Location = new System.Drawing.Point(108, 145);
+            this.txtMenuName.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.txtMenuName.Location = new System.Drawing.Point(108, 142);
             this.txtMenuName.Name = "txtMenuName";
-            this.txtMenuName.Size = new System.Drawing.Size(165, 22);
+            this.txtMenuName.Size = new System.Drawing.Size(165, 27);
             this.txtMenuName.TabIndex = 11;
+            this.txtMenuName.TextChanged += new System.EventHandler(this.txtMenuName_TextChanged);
             // 
             // txtMenuCode
             // 
             this.txtMenuCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMenuCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtMenuCode.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtMenuCode.Location = new System.Drawing.Point(108, 105);
+            this.txtMenuCode.Enabled = false;
+            this.txtMenuCode.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.txtMenuCode.Location = new System.Drawing.Point(108, 102);
             this.txtMenuCode.Name = "txtMenuCode";
-            this.txtMenuCode.Size = new System.Drawing.Size(165, 22);
+            this.txtMenuCode.Size = new System.Drawing.Size(165, 27);
             this.txtMenuCode.TabIndex = 10;
             // 
             // cmbFatherMenu
@@ -162,7 +170,7 @@
             this.cmbOrg.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cmbOrg.FormattingEnabled = true;
             this.cmbOrg.ItemHeight = 28;
-            this.cmbOrg.Location = new System.Drawing.Point(108, 13);
+            this.cmbOrg.Location = new System.Drawing.Point(106, 13);
             this.cmbOrg.Name = "cmbOrg";
             this.cmbOrg.Size = new System.Drawing.Size(165, 34);
             this.cmbOrg.TabIndex = 8;
@@ -255,45 +263,46 @@
             this.myLabel1.TabIndex = 0;
             this.myLabel1.Text = "上级目录：";
             // 
-            // myButton1
+            // btn_save
             // 
-            this.myButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.myButton1.FlatAppearance.BorderSize = 0;
-            this.myButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.myButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.myButton1.ForeColor = System.Drawing.Color.White;
-            this.myButton1.Location = new System.Drawing.Point(301, 11);
-            this.myButton1.Name = "myButton1";
-            this.myButton1.Size = new System.Drawing.Size(75, 23);
-            this.myButton1.TabIndex = 0;
-            this.myButton1.Text = "保存";
-            this.myButton1.UseVisualStyleBackColor = true;
+            this.btn_save.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_save.FlatAppearance.BorderSize = 0;
+            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_save.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_save.ForeColor = System.Drawing.Color.White;
+            this.btn_save.Location = new System.Drawing.Point(301, 11);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(75, 23);
+            this.btn_save.TabIndex = 0;
+            this.btn_save.Text = "保存";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // myPanel2
             // 
             this.myPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
-            this.myPanel2.Controls.Add(this.myButton1);
-            this.myPanel2.Controls.Add(this.myButton2);
+            this.myPanel2.Controls.Add(this.btn_save);
+            this.myPanel2.Controls.Add(this.btn_close);
             this.myPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myPanel2.Location = new System.Drawing.Point(0, 266);
             this.myPanel2.Name = "myPanel2";
             this.myPanel2.Size = new System.Drawing.Size(480, 48);
             this.myPanel2.TabIndex = 2;
             // 
-            // myButton2
+            // btn_close
             // 
-            this.myButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.myButton2.FlatAppearance.BorderSize = 0;
-            this.myButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.myButton2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.myButton2.ForeColor = System.Drawing.Color.White;
-            this.myButton2.Location = new System.Drawing.Point(393, 11);
-            this.myButton2.Name = "myButton2";
-            this.myButton2.Size = new System.Drawing.Size(75, 23);
-            this.myButton2.TabIndex = 1;
-            this.myButton2.Text = "取消";
-            this.myButton2.UseVisualStyleBackColor = true;
-            this.myButton2.Click += new System.EventHandler(this.myButton2_Click);
+            this.btn_close.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_close.FlatAppearance.BorderSize = 0;
+            this.btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_close.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_close.ForeColor = System.Drawing.Color.White;
+            this.btn_close.Location = new System.Drawing.Point(393, 11);
+            this.btn_close.Name = "btn_close";
+            this.btn_close.Size = new System.Drawing.Size(75, 23);
+            this.btn_close.TabIndex = 1;
+            this.btn_close.Text = "取消";
+            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.Click += new System.EventHandler(this.myButton2_Click);
             // 
             // MenuEdit
             // 
@@ -302,6 +311,7 @@
             this.ClientSize = new System.Drawing.Size(480, 314);
             this.Controls.Add(this.myPanel2);
             this.Controls.Add(this.myPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuEdit";
             this.Text = "MenuEdit";
             this.myPanel1.ResumeLayout(false);
@@ -315,8 +325,8 @@
 
         private MyPanel myPanel1;
         private MyPanel myPanel2;
-        private MyButton myButton1;
-        private MyButton myButton2;
+        private MyButton btn_save;
+        private MyButton btn_close;
         private MyLabel myLabel1;
         private MyLabel myLabel8;
         private MyLabel myLabel7;
@@ -330,7 +340,7 @@
         private MyTextBox txtMenuCode;
         private MyComboBox cmbFlag;
         private MyTextBox txtMenuName;
-        private MyTextBox myTextBox3;
+        private MyTextBox txt_url;
         private MyTextBox txtPym;
         private MyTextBox txtSxh;
     }

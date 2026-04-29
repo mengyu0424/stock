@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 [ToolboxBitmap(typeof(DataGridView))]
 public class MyDataGridView : DataGridView
@@ -13,6 +15,8 @@ public class MyDataGridView : DataGridView
 
     public MyDataGridView()
     {
+        CellFormatting += MyDataGridView_CellFormatting;
+
         // 核心：手动列不会被清空
         this.AutoGenerateColumns = false;
 
@@ -40,7 +44,7 @@ public class MyDataGridView : DataGridView
         // 隔行变色
         this.AlternatingRowsDefaultCellStyle.BackColor = _alternateRow;
 
-        // 表头样式（改为统一深蓝色）
+        // 表头样式
         this.ColumnHeadersDefaultCellStyle.BackColor = _normal;
         this.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
         this.ColumnHeadersDefaultCellStyle.Font = new Font("微软雅黑", 9F);
@@ -115,4 +119,83 @@ public class MyDataGridView : DataGridView
                 e.RowIndex % 2 == 0 ? Color.White : _alternateRow;
         }
     }
+
+    #region 单元格值转换属性（支持设计器保存）
+    private bool _convertValueFlag = false;
+
+    [DefaultValue(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description("开启后自动根据规则转换单元格显示文本")]
+    public bool ConvertValueFlag
+    {
+        get => _convertValueFlag;
+        set => _convertValueFlag = value;
+    }
+
+    private string _convertValueData = string.Empty;
+
+    [DefaultValue("")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description("格式：列名:1-启用*0-停用;列名2:1-开启*0-关闭")]
+    public string ConvertValueData
+    {
+        get => _convertValueData;
+        set
+        {
+            _convertValueData = value;
+            ParseConvertRule();
+        }
+    }
+
+    private readonly Dictionary<string, Dictionary<string, string>> _colMapping = new Dictionary<string, Dictionary<string, string>>();
+
+    private void ParseConvertRule()
+    {
+        _colMapping.Clear();
+        if (string.IsNullOrWhiteSpace(ConvertValueData))
+            return;
+
+        string[] colRules = ConvertValueData.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (var colRuleItem in colRules)
+        {
+            string[] colKv = colRuleItem.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            if (colKv.Length != 2) continue;
+
+            string colName = colKv[0].Trim().ToLower();
+            string mapStr = colKv[1].Trim();
+            var dic = new Dictionary<string, string>();
+
+            string[] itemArr = mapStr.Split(new char[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in itemArr)
+            {
+                string[] kv = item.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                if (kv.Length >= 2)
+                {
+                    string key = kv[0].Trim();
+                    string text = kv[1].Trim();
+                    dic[key] = text;
+                }
+            }
+            _colMapping[colName] = dic;
+        }
+    }
+
+    private void MyDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+    {
+        if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+        if (!ConvertValueFlag) return;
+        if (e.Value == null || e.Value == DBNull.Value) return;
+
+        string curColName = this.Columns[e.ColumnIndex].Name.Trim().ToLower();
+        if (_colMapping.TryGetValue(curColName, out var mapDic))
+        {
+            string valKey = e.Value.ToString().Trim();
+            if (mapDic.TryGetValue(valKey, out string showTxt))
+            {
+                e.Value = showTxt;
+                e.FormattingApplied = true;
+            }
+        }
+    }
+    #endregion
 }
