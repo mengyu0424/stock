@@ -33,6 +33,8 @@ namespace WindowsFormsApp.维护功能
             MenuEdit menuEdit = new MenuEdit("Add", null);
             menuEdit.Text = "新增菜单";
             menuEdit.ShowDialog();
+            DataTable menuData = GetMenuData();
+            dgvMenuList.DataSource = menuData;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -64,11 +66,8 @@ namespace WindowsFormsApp.维护功能
             MenuEdit menuEdit = new MenuEdit("Edit", dt);
             menuEdit.Text = "修改菜单";
             menuEdit.ShowDialog();
-        }
-
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-
+            DataTable menuData = GetMenuData();
+            dgvMenuList.DataSource = menuData;
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -86,27 +85,6 @@ namespace WindowsFormsApp.维护功能
                                                                 where m.orgcode='{0}'
                                                                 order by nvl(n.sxh,m.sxh),m.menulevel,m.sxh ", cmb_Org.SelectedValue.ToString());
             return OracleDbHelper.ExecuteQuery(sql);
-        }
-
-        private DataTable FatherMenuLoad()
-        {
-            string sql = string.Format(@"select t.code,t.name,t.pym,t.sxh,case when t.flag=1 then '启用' else '禁用' end as flag from code_menu t
-                                                                where t.orgcode='{0}'
-                                                                and t.menulevel=0 order by t.sxh asc", cmb_Org.SelectedValue.ToString());
-            return OracleDbHelper.ExecuteQuery(sql);
-        }
-
-        private string GetMenuCode()
-        {
-            string sql = string.Format(@" select max(code)+1 as code from code_menu where orgcode='{0}' ", cmb_Org.SelectedValue.ToString());
-            return OracleDbHelper.ExecuteScalar(sql).ToString();
-        }
-
-        private void dgv_fatherMenu_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-            }
         }
     }
 }

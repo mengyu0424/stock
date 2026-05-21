@@ -34,7 +34,6 @@
             this.groupBox1 = new MyGroupBox();
             this.btnEdit = new MyButton();
             this.btn_Refresh = new MyButton();
-            this.btn_Save = new MyButton();
             this.btn_Add = new MyButton();
             this.groupBox3 = new MyGroupBox();
             this.dgvMenuList = new MyDataGridView();
@@ -63,7 +62,6 @@
             // 
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Controls.Add(this.btn_Refresh);
-            this.groupBox1.Controls.Add(this.btn_Save);
             this.groupBox1.Controls.Add(this.btn_Add);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -98,7 +96,7 @@
             this.btn_Refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Refresh.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.btn_Refresh.ForeColor = System.Drawing.Color.White;
-            this.btn_Refresh.Location = new System.Drawing.Point(216, 11);
+            this.btn_Refresh.Location = new System.Drawing.Point(146, 11);
             this.btn_Refresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Refresh.Name = "btn_Refresh";
             this.btn_Refresh.Size = new System.Drawing.Size(64, 25);
@@ -106,21 +104,6 @@
             this.btn_Refresh.Text = "刷新";
             this.btn_Refresh.UseVisualStyleBackColor = true;
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Save.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.btn_Save.ForeColor = System.Drawing.Color.White;
-            this.btn_Save.Location = new System.Drawing.Point(146, 11);
-            this.btn_Save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(64, 25);
-            this.btn_Save.TabIndex = 2;
-            this.btn_Save.Text = "保存";
-            this.btn_Save.UseVisualStyleBackColor = true;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // btn_Add
             // 
@@ -309,11 +292,15 @@
             // 
             // cmb_Org
             // 
+            this.cmb_Org.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_Org.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_Org.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmb_Org.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmb_Org.DropDownHeight = 200;
             this.cmb_Org.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmb_Org.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.cmb_Org.FormattingEnabled = true;
+            this.cmb_Org.IntegralHeight = false;
             this.cmb_Org.ItemHeight = 24;
             this.cmb_Org.Location = new System.Drawing.Point(70, 19);
             this.cmb_Org.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -364,7 +351,6 @@
         private MyGroupBox groupBox1;
         private MyGroupBox groupBox3;
         private MyButton btn_Add;
-        private MyButton btn_Save;
         private MyButton btn_Refresh;
         private MyDataGridView dgvMenuList;
         private System.Windows.Forms.DataGridViewTextBoxColumn FATHERCODE;
