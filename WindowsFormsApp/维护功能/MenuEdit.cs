@@ -14,7 +14,6 @@ namespace WindowsFormsApp.维护功能
         private string winType = string.Empty;
         private DataTable priData = new DataTable();
 
-        private string priOrgCode = string.Empty;
         private string priMenuCode = string.Empty;
         /// <summary>
         ///
@@ -43,19 +42,10 @@ namespace WindowsFormsApp.维护功能
 
         private void MenuEdit_Load()
         {
-            //机构数据
-            cmbOrg.DataSource = GlobalInfo.orgData;
-            cmbOrg.DisplayMember = "NAME";
-            cmbOrg.ValueMember = "CODE";
-            cmbOrg.SelectedValue = GlobalInfo.userInfo.orgCode;
-            cmbOrg.Enabled = false;//暂时机构就一个，不允许修改
-
-
-
             if (winType== "Add" || priData.Rows[0]["menulevel"].ToString()!="0")
             {
                 //上级菜单数据
-                string sql = string.Format(@" select code,name from code_menu where menulevel='0' and flag='1' and orgcode='{0}' ", GlobalInfo.userInfo.orgCode);
+                string sql = string.Format(@" select code,name from code_menu where menulevel='0' and flag='1' ");
                 if (winType == "Edit")
                 {
                     sql += string.Format(" and code!='{0}' ", priData.Rows[0]["menuCode"].ToString());
@@ -81,14 +71,12 @@ namespace WindowsFormsApp.维护功能
         /// </summary>
         private void MenuAddLoad()
         {
-            txtMenuCode.Text = OracleDbHelper.ExecuteScalar(string.Format("select max(code)+1 code from code_menu where orgcode='{0}'", GlobalInfo.userInfo.orgCode)).ToString();
-            priOrgCode = GlobalInfo.userInfo.orgCode;
+            txtMenuCode.Text = OracleDbHelper.ExecuteScalar(string.Format("select max(code)+1 code from code_menu")).ToString();
             priMenuCode = txtMenuCode.Text;
         }
 
         private void MenuEditLoad(DataTable dt)
         {
-            cmbOrg.SelectedValue = dt.Rows[0]["orgCode"].ToString();
             cmbFatherMenu.SelectedValue = dt.Rows[0]["fatherCode"].ToString();
             txtMenuCode.Text = dt.Rows[0]["menuCode"].ToString();
             txtMenuName.Text = dt.Rows[0]["menuName"].ToString();
@@ -97,7 +85,6 @@ namespace WindowsFormsApp.维护功能
             txtSxh.Text = dt.Rows[0]["sxh"].ToString();
             txt_url.Text = dt.Rows[0]["path"].ToString();
 
-            priOrgCode = dt.Rows[0]["orgCode"].ToString();
             priMenuCode = dt.Rows[0]["menuCode"].ToString();
         }
 
@@ -114,7 +101,6 @@ namespace WindowsFormsApp.维护功能
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            var orgCode = cmbOrg.SelectedValue.ToString();
             var fatherCode = cmbFatherMenu.SelectedValue.ToString();
             var menuCode = txtMenuCode.Text.Trim();
             var menuName = txtMenuName.Text.Trim();
@@ -125,10 +111,10 @@ namespace WindowsFormsApp.维护功能
             var menulevel = fatherCode == "" ? 0 : 1;
 
             List<string> sqlList = new List<string>();
-            string delSql = string.Format(@" delete from code_menu where orgcode='{0}' and code='{1}' ", priOrgCode, priMenuCode);
+            string delSql = string.Format(@" delete from code_menu where code='{0}' ", priMenuCode);
             sqlList.Add(delSql);
-            string addSql = string.Format(@"insert into code_menu (CODE, NAME, PYM, MENULEVEL, FATHERCODE, FLAG, PATH, ORGCODE, SXH)
-                                                                        values ('{0}', '{1}', '{2}', {3}, '{4}', {5}, '{6}', '{7}', {8})", menuCode, menuName, pym, menulevel, fatherCode, flag, path, orgCode, sxh);
+            string addSql = string.Format(@"insert into code_menu (CODE, NAME, PYM, MENULEVEL, FATHERCODE, FLAG, PATH, SXH)
+                                                                        values ('{0}', '{1}', '{2}', {3}, '{4}', {5}, '{6}', '{7}', {8})", menuCode, menuName, pym, menulevel, fatherCode, flag, path, sxh);
             sqlList.Add(addSql);
             int result = OracleDbHelper.BatchExecuteNonQuery(sqlList);
             if (result > 0)

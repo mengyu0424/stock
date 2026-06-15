@@ -61,6 +61,9 @@ public class MyDataGridView : DataGridView
 
         // 双缓冲防闪烁
         SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+        
+        // 订阅 DataSourceChanged 事件，在数据绑定后清除选中
+        this.DataSourceChanged += MyDataGridView_DataSourceChanged;
     }
 
     // 重写启用/禁用事件，应用对应样式
@@ -119,6 +122,33 @@ public class MyDataGridView : DataGridView
                 e.RowIndex % 2 == 0 ? Color.White : _alternateRow;
         }
     }
+
+    #region 自动选中控制
+    
+    private bool _autoSelectFirstRow = false;
+
+    [DefaultValue(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Description("加载数据后是否自动选中第一行（默认false）")]
+    public bool AutoSelectFirstRow
+    {
+        get => _autoSelectFirstRow;
+        set => _autoSelectFirstRow = value;
+    }
+
+    /// <summary>
+    /// 数据源改变时触发
+    /// </summary>
+    private void MyDataGridView_DataSourceChanged(object sender, EventArgs e)
+    {
+        // 如果设置为不自动选中第一行，则清除选中状态
+        if (!_autoSelectFirstRow && this.Rows.Count > 0)
+        {
+            this.ClearSelection();
+        }
+    }
+
+    #endregion
 
     #region 单元格值转换属性（支持设计器保存）
     private bool _convertValueFlag = false;

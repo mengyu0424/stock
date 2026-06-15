@@ -58,13 +58,13 @@ namespace WindowsFormsApp.主窗体
             else
             {
                 string sql = string.Format(@" select e.code fathercode,e.name fathername,e.sxh fathersxh,d.code,d.name,d.path,d.sxh from code_czydm a
-                                                                    left join code_czy_usertype b on a.code=b.czycode and a.orgcode=b.orgcode and b.flag=1
-                                                                    left join code_menu_assign c on b.usertypecode=c.usertypecode and b.orgcode=c.orgcode and c.flag=1
-                                                                    left join code_menu d on c.menucode=d.code and d.orgcode=c.orgcode and d.flag=1 and d.menulevel=1
-                                                                    left join code_menu e on d.fathercode=e.code and d.orgcode=e.orgcode and e.menulevel=0
+                                                                    left join code_czy_usertype b on a.code=b.czycode and b.flag=1
+                                                                    left join code_menu_assign c on b.usertypecode=c.usertypecode and c.flag=1
+                                                                    left join code_menu d on c.menucode=d.code and d.flag=1 and d.menulevel=1
+                                                                    left join code_menu e on d.fathercode=e.code and e.menulevel=0
                                                                     where a.code='{0}'
                                                                     and e.flag=1/*此处是筛选分类菜单关闭 则全部不显示*/
-                                                                    and a.orgcode='{1}' ", GlobalInfo.userInfo.ID, GlobalInfo.userInfo.orgCode);
+                                                                    ", GlobalInfo.userInfo.ID);
                 menuDT = OracleDbHelper.ExecuteQuery(sql);
                 menuDT.Rows.Add("999", "工具", 2, "301", "小工具集合", "WindowsFormsApp.测试菜单.小工具", 0);
             }

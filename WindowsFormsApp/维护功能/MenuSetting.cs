@@ -17,12 +17,6 @@ namespace WindowsFormsApp.维护功能
 
         private void init()
         {
-            //加载机构数据
-            cmb_Org.DataSource = GlobalInfo.orgData;
-            cmb_Org.DisplayMember = "NAME";
-            cmb_Org.ValueMember = "CODE";
-            cmb_Org.Enabled = false;//暂时机构就一个，不允许修改
-            cmb_Org.SelectedValue = GlobalInfo.userInfo.orgCode;
             //页面加载菜单数据
             DataTable menuData = GetMenuData();
             dgvMenuList.DataSource = menuData;
@@ -41,7 +35,6 @@ namespace WindowsFormsApp.维护功能
         {
             var data = dgvMenuList.SelectedRows;
             DataTable dt=new DataTable();
-            dt.Columns.Add("orgCode",typeof(string));
             dt.Columns.Add("fatherCode", typeof(string));
             dt.Columns.Add("menuCode", typeof(string));
             dt.Columns.Add("menuName", typeof(string));
@@ -52,7 +45,6 @@ namespace WindowsFormsApp.维护功能
             dt.Columns.Add("menulevel", typeof(string));
 
             DataRow dr=dt.NewRow();
-            dr["orgCode"] = data[0].Cells["ORGCODE"].Value.ToString();
             dr["fatherCode"] = data[0].Cells["FATHERCODE"].Value.ToString();
             dr["menuCode"] = data[0].Cells["CODE"].Value.ToString();
             dr["menuName"] = data[0].Cells["NAME"].Value.ToString();
@@ -79,11 +71,9 @@ namespace WindowsFormsApp.维护功能
 
         private DataTable GetMenuData()
         {
-            string sql = string.Format(@"select m.fathercode,n.name fathername,m.code,m.name,m.pym,m.menulevel,m.flag,m.path,m.orgcode,o.name orgname,m.sxh,nvl(n.sxh,m.sxh) as fathersxh from code_menu m
-                                                                left join code_menu n on m.fathercode=n.code and m.orgcode=n.orgcode
-                                                                left join code_org o on m.orgcode=o.code
-                                                                where m.orgcode='{0}'
-                                                                order by nvl(n.sxh,m.sxh),m.menulevel,m.sxh ", cmb_Org.SelectedValue.ToString());
+            string sql = string.Format(@"select m.fathercode,n.name fathername,m.code,m.name,m.pym,m.menulevel,m.flag,m.path,m.sxh,nvl(n.sxh,m.sxh) as fathersxh from code_menu m
+                                                                left join code_menu n on m.fathercode=n.code
+                                                                order by nvl(n.sxh,m.sxh),m.menulevel,m.sxh ");
             return OracleDbHelper.ExecuteQuery(sql);
         }
     }

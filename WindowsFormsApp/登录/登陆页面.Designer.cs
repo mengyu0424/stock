@@ -22,8 +22,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbOrg = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -65,20 +63,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label3.Name = "label3";
-            // 
-            // cmbOrg
-            // 
-            resources.ApplyResources(this.cmbOrg, "cmbOrg");
-            this.cmbOrg.FormattingEnabled = true;
-            this.cmbOrg.Name = "cmbOrg";
-            this.cmbOrg.Tag = "Name";
-            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -94,8 +78,6 @@
             this.BackgroundImage = global::WindowsFormsApp.Properties.Resources.background;
             this.ControlBox = false;
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbOrg);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
@@ -117,8 +99,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbOrg;
         private System.Windows.Forms.Label label4;
     }
 }

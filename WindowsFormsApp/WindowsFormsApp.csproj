@@ -176,6 +176,12 @@
     <Compile Include="登录\登陆页面.Designer.cs">
       <DependentUpon>登陆页面.cs</DependentUpon>
     </Compile>
+    <Compile Include="维护功能\MenuAssignSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\MenuAssignSetting.Designer.cs">
+      <DependentUpon>MenuAssignSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="维护功能\UserTypeSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,12 @@
     </Compile>
     <Compile Include="维护功能\MenuSetting.Designer.cs">
       <DependentUpon>MenuSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护功能\UserSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\UserSetting.Designer.cs">
+      <DependentUpon>UserSetting.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -222,6 +234,9 @@
     <EmbeddedResource Include="登录\登陆页面.zh-CN.resx">
       <DependentUpon>登陆页面.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\MenuAssignSetting.resx">
+      <DependentUpon>MenuAssignSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="维护功能\UserTypeSetting.resx">
       <DependentUpon>UserTypeSetting.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="维护功能\MenuSetting.resx">
       <DependentUpon>MenuSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\UserSetting.resx">
+      <DependentUpon>UserSetting.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>

@@ -24,13 +24,6 @@ namespace WindowsFormsApp.维护功能
         }
         private void init()
         {
-            //加载机构数据
-            cmb_Org.DataSource = GlobalInfo.orgData;
-            cmb_Org.DisplayMember = "NAME";
-            cmb_Org.ValueMember = "CODE";
-            cmb_Org.Enabled = false;//暂时机构就一个，不允许修改
-            cmb_Org.SelectedValue = GlobalInfo.userInfo.orgCode;
-
             //页面加载菜单数据
             DataTable menuData = GetUserTypeData();
             dgvUserTypeList.DataSource = menuData;
@@ -47,16 +40,10 @@ namespace WindowsFormsApp.维护功能
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            var orgCode = cmb_Org.SelectedValue.ToString();
             var code = txtCode.Text.Trim();
             var name = txtName.Text.Trim();
             var pym = txtPym.Text.Trim();
             var flag = cmbFlag.SelectedItem.ToString() == "启用" ? "1" : "0";
-            if (string.IsNullOrEmpty(orgCode))
-            {
-                MessageBox.Show("机构不能为空！");
-                return;
-            }
             if (string.IsNullOrEmpty(code))
             {
                 MessageBox.Show("角色代码不能为空！");
@@ -73,9 +60,9 @@ namespace WindowsFormsApp.维护功能
                 return;
             }
             List<string> sqlList = new List<string>();
-            string delSql = string.Format(@" delete from code_usertype where code='{0}' and orgcode='{1}' ", code, orgCode);
+            string delSql = string.Format(@" delete from code_usertype where code='{0}' ", code);
             sqlList.Add(delSql);
-            string addSql = string.Format(@"insert into code_usertype (CODE, NAME, PYM, FLAG, ORGCODE) values ('{0}', '{1}', '{2}', {3}, '{4}')", code, name, pym, flag, orgCode);
+            string addSql = string.Format(@"insert into code_usertype (CODE, NAME, PYM, FLAG) values ('{0}', '{1}', '{2}', {3})", code, name, pym, flag);
             sqlList.Add(addSql);
             int result = OracleDbHelper.BatchExecuteNonQuery(sqlList);
             if (result > 0)
@@ -99,10 +86,7 @@ namespace WindowsFormsApp.维护功能
 
         private DataTable GetUserTypeData()
         {
-            string sql = string.Format(@"select a.code,a.name,a.pym,a.flag,a.orgcode,b.name orgname from code_usertype a
-left join code_org b on a.orgcode=b.code
-where a.orgcode='{0}'
-order by a.code,a.name asc ", cmb_Org.SelectedValue.ToString());
+            string sql = string.Format(@"select a.code,a.name,a.pym,a.flag from code_usertype a order by a.code,a.name asc ");
             return OracleDbHelper.ExecuteQuery(sql);
         }
 
@@ -118,7 +102,6 @@ order by a.code,a.name asc ", cmb_Org.SelectedValue.ToString());
             {
                 DataGridViewRow row = dgvUserTypeList.SelectedRows[0];
 
-                cmb_Org.SelectedIndex = 0;
                 txtCode.Text = row.Cells["Code"].Value.ToString();
                 txtName.Text = row.Cells["Name"].Value.ToString();
                 txtPym.Text = row.Cells["Pym"].Value.ToString();

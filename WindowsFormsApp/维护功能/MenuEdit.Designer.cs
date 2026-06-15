@@ -37,9 +37,7 @@
             this.txtMenuName = new MyTextBox();
             this.txtMenuCode = new MyTextBox();
             this.cmbFatherMenu = new MyComboBox();
-            this.cmbOrg = new MyComboBox();
             this.myLabel8 = new MyLabel();
-            this.myLabel7 = new MyLabel();
             this.myLabel6 = new MyLabel();
             this.myLabel5 = new MyLabel();
             this.myLabel4 = new MyLabel();
@@ -63,9 +61,7 @@
             this.myPanel1.Controls.Add(this.txtMenuName);
             this.myPanel1.Controls.Add(this.txtMenuCode);
             this.myPanel1.Controls.Add(this.cmbFatherMenu);
-            this.myPanel1.Controls.Add(this.cmbOrg);
             this.myPanel1.Controls.Add(this.myLabel8);
-            this.myPanel1.Controls.Add(this.myLabel7);
             this.myPanel1.Controls.Add(this.myLabel6);
             this.myPanel1.Controls.Add(this.myLabel5);
             this.myPanel1.Controls.Add(this.myLabel4);
@@ -75,7 +71,7 @@
             this.myPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.myPanel1.Location = new System.Drawing.Point(0, 0);
             this.myPanel1.Name = "myPanel1";
-            this.myPanel1.Size = new System.Drawing.Size(480, 266);
+            this.myPanel1.Size = new System.Drawing.Size(480, 233);
             this.myPanel1.TabIndex = 1;
             // 
             // txtPym
@@ -83,7 +79,7 @@
             this.txtPym.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPym.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtPym.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.txtPym.Location = new System.Drawing.Point(368, 142);
+            this.txtPym.Location = new System.Drawing.Point(367, 101);
             this.txtPym.Name = "txtPym";
             this.txtPym.Size = new System.Drawing.Size(100, 27);
             this.txtPym.TabIndex = 15;
@@ -93,7 +89,7 @@
             this.txtSxh.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSxh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtSxh.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.txtSxh.Location = new System.Drawing.Point(368, 182);
+            this.txtSxh.Location = new System.Drawing.Point(367, 141);
             this.txtSxh.Name = "txtSxh";
             this.txtSxh.Size = new System.Drawing.Size(100, 27);
             this.txtSxh.TabIndex = 14;
@@ -104,23 +100,27 @@
             this.txt_url.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_url.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txt_url.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.txt_url.Location = new System.Drawing.Point(106, 222);
+            this.txt_url.Location = new System.Drawing.Point(105, 181);
             this.txt_url.Name = "txt_url";
             this.txt_url.Size = new System.Drawing.Size(344, 27);
             this.txt_url.TabIndex = 13;
             // 
             // cmbFlag
             // 
+            this.cmbFlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbFlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbFlag.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbFlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbFlag.DropDownHeight = 200;
             this.cmbFlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFlag.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cmbFlag.FormattingEnabled = true;
+            this.cmbFlag.IntegralHeight = false;
             this.cmbFlag.ItemHeight = 28;
             this.cmbFlag.Items.AddRange(new object[] {
             "启用",
             "禁用"});
-            this.cmbFlag.Location = new System.Drawing.Point(108, 178);
+            this.cmbFlag.Location = new System.Drawing.Point(107, 137);
             this.cmbFlag.Name = "cmbFlag";
             this.cmbFlag.Size = new System.Drawing.Size(165, 34);
             this.cmbFlag.TabIndex = 12;
@@ -131,7 +131,7 @@
             this.txtMenuName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMenuName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtMenuName.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.txtMenuName.Location = new System.Drawing.Point(108, 142);
+            this.txtMenuName.Location = new System.Drawing.Point(107, 101);
             this.txtMenuName.Name = "txtMenuName";
             this.txtMenuName.Size = new System.Drawing.Size(165, 27);
             this.txtMenuName.TabIndex = 11;
@@ -143,66 +143,45 @@
             this.txtMenuCode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtMenuCode.Enabled = false;
             this.txtMenuCode.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.txtMenuCode.Location = new System.Drawing.Point(108, 102);
+            this.txtMenuCode.Location = new System.Drawing.Point(107, 61);
             this.txtMenuCode.Name = "txtMenuCode";
             this.txtMenuCode.Size = new System.Drawing.Size(165, 27);
             this.txtMenuCode.TabIndex = 10;
             // 
             // cmbFatherMenu
             // 
+            this.cmbFatherMenu.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbFatherMenu.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbFatherMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbFatherMenu.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbFatherMenu.DropDownHeight = 200;
             this.cmbFatherMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbFatherMenu.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cmbFatherMenu.FormattingEnabled = true;
+            this.cmbFatherMenu.IntegralHeight = false;
             this.cmbFatherMenu.ItemHeight = 28;
-            this.cmbFatherMenu.Location = new System.Drawing.Point(108, 53);
+            this.cmbFatherMenu.Location = new System.Drawing.Point(107, 12);
             this.cmbFatherMenu.Name = "cmbFatherMenu";
             this.cmbFatherMenu.Size = new System.Drawing.Size(165, 34);
             this.cmbFatherMenu.TabIndex = 9;
-            // 
-            // cmbOrg
-            // 
-            this.cmbOrg.BackColor = System.Drawing.Color.White;
-            this.cmbOrg.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbOrg.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbOrg.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.cmbOrg.FormattingEnabled = true;
-            this.cmbOrg.ItemHeight = 28;
-            this.cmbOrg.Location = new System.Drawing.Point(106, 13);
-            this.cmbOrg.Name = "cmbOrg";
-            this.cmbOrg.Size = new System.Drawing.Size(165, 34);
-            this.cmbOrg.TabIndex = 8;
             // 
             // myLabel8
             // 
             this.myLabel8.AutoSize = true;
             this.myLabel8.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel8.Location = new System.Drawing.Point(288, 186);
+            this.myLabel8.Location = new System.Drawing.Point(287, 145);
             this.myLabel8.Name = "myLabel8";
             this.myLabel8.Size = new System.Drawing.Size(74, 21);
             this.myLabel8.TabIndex = 7;
             this.myLabel8.Text = "顺序号：";
-            // 
-            // myLabel7
-            // 
-            this.myLabel7.AutoSize = true;
-            this.myLabel7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.myLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel7.Location = new System.Drawing.Point(12, 26);
-            this.myLabel7.Name = "myLabel7";
-            this.myLabel7.Size = new System.Drawing.Size(88, 21);
-            this.myLabel7.TabIndex = 6;
-            this.myLabel7.Text = "机      构：";
             // 
             // myLabel6
             // 
             this.myLabel6.AutoSize = true;
             this.myLabel6.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel6.Location = new System.Drawing.Point(12, 226);
+            this.myLabel6.Location = new System.Drawing.Point(11, 185);
             this.myLabel6.Name = "myLabel6";
             this.myLabel6.Size = new System.Drawing.Size(90, 21);
             this.myLabel6.TabIndex = 5;
@@ -213,7 +192,7 @@
             this.myLabel5.AutoSize = true;
             this.myLabel5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel5.Location = new System.Drawing.Point(12, 186);
+            this.myLabel5.Location = new System.Drawing.Point(11, 145);
             this.myLabel5.Name = "myLabel5";
             this.myLabel5.Size = new System.Drawing.Size(90, 21);
             this.myLabel5.TabIndex = 4;
@@ -224,7 +203,7 @@
             this.myLabel4.AutoSize = true;
             this.myLabel4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel4.Location = new System.Drawing.Point(288, 146);
+            this.myLabel4.Location = new System.Drawing.Point(287, 105);
             this.myLabel4.Name = "myLabel4";
             this.myLabel4.Size = new System.Drawing.Size(74, 21);
             this.myLabel4.TabIndex = 3;
@@ -235,7 +214,7 @@
             this.myLabel3.AutoSize = true;
             this.myLabel3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel3.Location = new System.Drawing.Point(12, 146);
+            this.myLabel3.Location = new System.Drawing.Point(11, 105);
             this.myLabel3.Name = "myLabel3";
             this.myLabel3.Size = new System.Drawing.Size(90, 21);
             this.myLabel3.TabIndex = 2;
@@ -246,7 +225,7 @@
             this.myLabel2.AutoSize = true;
             this.myLabel2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel2.Location = new System.Drawing.Point(12, 106);
+            this.myLabel2.Location = new System.Drawing.Point(11, 65);
             this.myLabel2.Name = "myLabel2";
             this.myLabel2.Size = new System.Drawing.Size(90, 21);
             this.myLabel2.TabIndex = 1;
@@ -257,7 +236,7 @@
             this.myLabel1.AutoSize = true;
             this.myLabel1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.myLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.myLabel1.Location = new System.Drawing.Point(12, 66);
+            this.myLabel1.Location = new System.Drawing.Point(11, 25);
             this.myLabel1.Name = "myLabel1";
             this.myLabel1.Size = new System.Drawing.Size(90, 21);
             this.myLabel1.TabIndex = 0;
@@ -284,9 +263,9 @@
             this.myPanel2.Controls.Add(this.btn_save);
             this.myPanel2.Controls.Add(this.btn_close);
             this.myPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.myPanel2.Location = new System.Drawing.Point(0, 266);
+            this.myPanel2.Location = new System.Drawing.Point(0, 233);
             this.myPanel2.Name = "myPanel2";
-            this.myPanel2.Size = new System.Drawing.Size(480, 48);
+            this.myPanel2.Size = new System.Drawing.Size(480, 50);
             this.myPanel2.TabIndex = 2;
             // 
             // btn_close
@@ -308,7 +287,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 314);
+            this.ClientSize = new System.Drawing.Size(480, 283);
             this.Controls.Add(this.myPanel2);
             this.Controls.Add(this.myPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -329,14 +308,12 @@
         private MyButton btn_close;
         private MyLabel myLabel1;
         private MyLabel myLabel8;
-        private MyLabel myLabel7;
         private MyLabel myLabel6;
         private MyLabel myLabel5;
         private MyLabel myLabel4;
         private MyLabel myLabel3;
         private MyLabel myLabel2;
         private MyComboBox cmbFatherMenu;
-        private MyComboBox cmbOrg;
         private MyTextBox txtMenuCode;
         private MyComboBox cmbFlag;
         private MyTextBox txtMenuName;

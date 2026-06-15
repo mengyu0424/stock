@@ -8,13 +8,11 @@ namespace ClassLibrary
     public static class GlobalInfo
     {
         public static UserInfo userInfo { get; set; }
-        public static List<OrgData> orgData { get; set; }
 
         static GlobalInfo()
         {
             // 初始化当前用户对象
             userInfo = new UserInfo();
-            orgData = new List<OrgData>();
         }
     }
 
@@ -33,37 +31,6 @@ namespace ClassLibrary
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// 机构代码
-        /// </summary>
-        public string orgCode { get; set; }
-
-        /// <summary>
-        /// 机构名称
-        /// </summary>
-        public string orgName { get; set; }
     }
 
-    public class OrgData
-    {
-        /// <summary>
-        /// 机构代码
-        /// </summary>
-        public string CODE { get; set; }
-
-        /// <summary>
-        /// 机构名称
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 拼音码
-        /// </summary>
-        public string PYM { get; set; }
-
-        /// <summary>
-        /// 启用标志
-        /// </summary>
-        public string FLAG { get; set; }
-    }
 }
