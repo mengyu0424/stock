@@ -10,8 +10,6 @@ namespace WindowsFormsApp.维护功能
 {
     public partial class DictListSetting : BaseForm
     {
-        private const string MainTable = "CODE_DICT_MAIN";
-        private const string DetailTable = "CODE_DICT_NEXT";
         private const string ModeAdd = "Add";
         private const string ModeEditMain = "EditMain";
         private const string ModeEditDetail = "EditDetail";
@@ -224,14 +222,14 @@ namespace WindowsFormsApp.维护功能
             if (string.IsNullOrWhiteSpace(keyword))
             {
                 sql = $@"select code, name, flag, bz
-                         from {MainTable}
+                         from CODE_DICT_MAIN
                          order by code";
                 dt = OracleDbHelper.ExecuteQuery(sql);
             }
             else
             {
                 sql = $@"select code, name, flag, bz
-                         from {MainTable}
+                         from CODE_DICT_MAIN
                          where instr(upper(nvl(code, '')), upper(:keyword1)) > 0
                             or instr(upper(nvl(name, '')), upper(:keyword2)) > 0
                             or instr(upper(nvl(bz, '')), upper(:keyword3)) > 0
@@ -276,7 +274,7 @@ namespace WindowsFormsApp.维护功能
             }
 
             string sql = $@"select code, name, bz
-                            from {DetailTable}
+                            from CODE_DICT_NEXT
                             where maincode = :maincode
                             order by code";
 
@@ -288,7 +286,7 @@ namespace WindowsFormsApp.维护功能
         private bool AddDictMain(string code, string name, string flag, string bz)
         {
             string existsSql = $@"select count(1)
-                                  from {MainTable}
+                                  from CODE_DICT_MAIN
                                   where code = :code";
 
             int existsCount = ToInt(OracleDbHelper.ExecuteScalar(
@@ -301,7 +299,7 @@ namespace WindowsFormsApp.维护功能
                 return false;
             }
 
-            string insertSql = $@"insert into {MainTable} (code, name, flag, bz)
+            string insertSql = $@"insert into CODE_DICT_MAIN (code, name, flag, bz)
                                   values (:code, :name, :flag, :bz)";
 
             int result = OracleDbHelper.ExecuteNonQuery(
@@ -322,7 +320,7 @@ namespace WindowsFormsApp.维护功能
                 return false;
             }
 
-            string updateSql = $@"update {MainTable}
+            string updateSql = $@"update CODE_DICT_MAIN
                                   set name = :name,
                                       flag = :flag,
                                       bz = :bz
@@ -349,7 +347,7 @@ namespace WindowsFormsApp.维护功能
             List<(string Sql, OracleParameter[] Params)> sqlList = new List<(string Sql, OracleParameter[] Params)>
             {
                 (
-                    $@"update {MainTable}
+                    $@"update CODE_DICT_MAIN
                        set name = :name,
                            flag = :flag,
                            bz = :bz
@@ -400,7 +398,7 @@ namespace WindowsFormsApp.维护功能
             }
 
             sqlList.Add((
-                $@"delete from {DetailTable}
+                $@"delete from CODE_DICT_NEXT
                    where maincode = :maincode",
                 new[]
                 {
@@ -410,7 +408,7 @@ namespace WindowsFormsApp.维护功能
             foreach ((string Code, string Name, string Bz) item in items)
             {
                 sqlList.Add((
-                    $@"insert into {DetailTable} (maincode, code, name, bz)
+                    $@"insert into CODE_DICT_NEXT (maincode, code, name, bz)
                        values (:maincode, :code, :name, :bz)",
                     new[]
                     {
@@ -490,7 +488,7 @@ namespace WindowsFormsApp.维护功能
             }
 
             string existsSql = $@"select count(1)
-                                  from {MainTable}
+                                  from CODE_DICT_MAIN
                                   where code = :code";
 
             int existsCount = ToInt(OracleDbHelper.ExecuteScalar(
@@ -506,7 +504,7 @@ namespace WindowsFormsApp.维护功能
             List<(string Sql, OracleParameter[] Params)> sqlList = new List<(string Sql, OracleParameter[] Params)>
             {
                 (
-                    $@"insert into {MainTable} (code, name, flag, bz)
+                    $@"insert into CODE_DICT_MAIN (code, name, flag, bz)
                        values (:code, :name, :flag, :bz)",
                     new[]
                     {
@@ -517,9 +515,9 @@ namespace WindowsFormsApp.维护功能
                     }
                 ),
                 (
-                    $@"insert into {DetailTable} (maincode, code, name, bz)
+                    $@"insert into CODE_DICT_NEXT (maincode, code, name, bz)
                        select :newMainCode, code, name, bz
-                       from {DetailTable}
+                       from CODE_DICT_NEXT
                        where maincode = :sourceCode",
                     new[]
                     {
