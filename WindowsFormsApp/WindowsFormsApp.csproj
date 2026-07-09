@@ -212,6 +212,24 @@
     <Compile Include="维护功能\UserSetting.Designer.cs">
       <DependentUpon>UserSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="维护功能\SystemParameterSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\SystemParameterSetting.Designer.cs">
+      <DependentUpon>SystemParameterSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护功能\DictListSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\DictListSetting.Designer.cs">
+      <DependentUpon>DictListSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护功能\DictListCopyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\DictListCopyDialog.Designer.cs">
+      <DependentUpon>DictListCopyDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -254,6 +272,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="维护功能\UserSetting.resx">
       <DependentUpon>UserSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\SystemParameterSetting.resx">
+      <DependentUpon>SystemParameterSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\DictListSetting.resx">
+      <DependentUpon>DictListSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\DictListCopyDialog.resx">
+      <DependentUpon>DictListCopyDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
