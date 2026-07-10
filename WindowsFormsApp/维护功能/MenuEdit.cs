@@ -84,6 +84,7 @@ namespace WindowsFormsApp.维护功能
             cmbFlag.SelectedItem = dt.Rows[0]["flag"].ToString()=="1"?"启用":"禁用";
             txtSxh.Text = dt.Rows[0]["sxh"].ToString();
             txt_url.Text = dt.Rows[0]["path"].ToString();
+            txt_cs.Text = dt.Rows[0]["cs"].ToString();
 
             priMenuCode = dt.Rows[0]["menuCode"].ToString();
         }
@@ -108,13 +109,14 @@ namespace WindowsFormsApp.维护功能
             var flag = cmbFlag.SelectedItem.ToString() == "启用" ? "1" : "0";
             var sxh = txtSxh.Text.Trim();
             var path = txt_url.Text.Trim();
+            var cs = txt_cs.Text.Trim();
             var menulevel = fatherCode == "" ? 0 : 1;
 
             List<string> sqlList = new List<string>();
             string delSql = string.Format(@" delete from code_menu where code='{0}' ", priMenuCode);
             sqlList.Add(delSql);
-            string addSql = string.Format(@"insert into code_menu (CODE, NAME, PYM, MENULEVEL, FATHERCODE, FLAG, PATH, SXH)
-                                                                        values ('{0}', '{1}', '{2}', {3}, '{4}', {5}, '{6}', {7})", menuCode, menuName, pym, menulevel, fatherCode, flag, path, sxh);
+            string addSql = string.Format(@"insert into code_menu (CODE, NAME, PYM, MENULEVEL, FATHERCODE, FLAG, PATH, CS, SXH)
+                                                                        values ('{0}', '{1}', '{2}', {3}, '{4}', {5}, '{6}', '{7}', {8})", menuCode, menuName, pym, menulevel, fatherCode, flag, path, cs, sxh);
             sqlList.Add(addSql);
             int result = OracleDbHelper.BatchExecuteNonQuery(sqlList);
             if (result > 0)

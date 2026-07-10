@@ -15,6 +15,7 @@ namespace WindowsFormsApp.主窗体
         private string csbz = ConfigurationManager.AppSettings["csbz"];
         private DataTable menuDT;
         private Dictionary<string, Type> _menuFormTypeMap = new Dictionary<string, Type>();
+        private Dictionary<string, string> _menuParameterMap = new Dictionary<string, string>();
         private Dictionary<string, TabButton> _openedTabMap = new Dictionary<string, TabButton>();
         private Dictionary<string, Form> _openedFormCache = new Dictionary<string, Form>();
         private Form _currentForm;
@@ -42,22 +43,23 @@ namespace WindowsFormsApp.主窗体
                 menuDT.Columns.Add("CODE", typeof(string));        // 对应ID
                 menuDT.Columns.Add("NAME", typeof(string));        // 对应Name
                 menuDT.Columns.Add("PATH", typeof(string));       // 对应Url
+                menuDT.Columns.Add("CS", typeof(string));         // 打开菜单时传递的参数
                 menuDT.Columns.Add("SXH", typeof(int));            // 菜单排序号（示例用0，可自定义）
 
                 // 2. 插入第一张图的模拟数据，严格对应列
                 // 分类一（FatherID=1，TypeName=分类一）
-                menuDT.Rows.Add("1", "分类一", 1, "101", "菜单1", "WindowsFormsApp.测试菜单.cshtml1", 1);
-                menuDT.Rows.Add("1", "分类一", 1, "102", "菜单2", "WindowsFormsApp.测试菜单.cshtml2", 3);
+                menuDT.Rows.Add("1", "分类一", 1, "101", "菜单1", "WindowsFormsApp.测试菜单.cshtml1", "", 1);
+                menuDT.Rows.Add("1", "分类一", 1, "102", "菜单2", "WindowsFormsApp.测试菜单.cshtml2", "", 3);
                 // 分类二（FatherID=2，TypeName=分类二）
-                menuDT.Rows.Add("2", "分类二", 2, "201", "菜单3", "WindowsFormsApp.测试菜单.cshtml3", 2);
-                menuDT.Rows.Add("2", "分类二", 2, "202", "长名称测试菜单", "WindowsFormsApp.测试菜单.cshtml1", 4);
-                menuDT.Rows.Add("2", "分类二", 2, "203", "错误菜单测试", "WindowsFormsApp测试菜单.cshtml1", 5);
+                menuDT.Rows.Add("2", "分类二", 2, "201", "菜单3", "WindowsFormsApp.测试菜单.cshtml3", "", 2);
+                menuDT.Rows.Add("2", "分类二", 2, "202", "长名称测试菜单", "WindowsFormsApp.测试菜单.cshtml1", "", 4);
+                menuDT.Rows.Add("2", "分类二", 2, "203", "错误菜单测试", "WindowsFormsApp测试菜单.cshtml1", "", 5);
                 //分类三（FatherID=3，TypeName=分类三）
-                menuDT.Rows.Add("3", "分类三", 2, "301", "小工具", "WindowsFormsApp.测试菜单.小工具", 0);
+                menuDT.Rows.Add("3", "分类三", 2, "301", "小工具", "WindowsFormsApp.测试菜单.小工具", "", 0);
             }
             else
             {
-                string sql = string.Format(@" select e.code fathercode,e.name fathername,e.sxh fathersxh,d.code,d.name,d.path,d.sxh from code_czydm a
+                string sql = string.Format(@" select e.code fathercode,e.name fathername,e.sxh fathersxh,d.code,d.name,d.path,d.cs,d.sxh from code_czydm a
                                                                     left join code_czy_usertype b on a.code=b.czycode and b.flag=1
                                                                     left join code_menu_assign c on b.usertypecode=c.usertypecode and c.flag=1
                                                                     left join code_menu d on c.menucode=d.code and d.flag=1 and d.menulevel=1
@@ -66,7 +68,7 @@ namespace WindowsFormsApp.主窗体
                                                                     and e.flag=1/*此处是筛选分类菜单关闭 则全部不显示*/
                                                                     ", GlobalInfo.userInfo.ID);
                 menuDT = OracleDbHelper.ExecuteQuery(sql);
-                menuDT.Rows.Add("999", "工具", 2, "301", "小工具集合", "WindowsFormsApp.测试菜单.小工具", 0);
+                menuDT.Rows.Add("999", "工具", 2, "301", "小工具集合", "WindowsFormsApp.测试菜单.小工具", "", 0);
             }
         }
 
@@ -92,6 +94,7 @@ namespace WindowsFormsApp.主窗体
                         Code = row.IsNull("CODE") ? string.Empty : row["CODE"].ToString(),
                         Name = row.IsNull("NAME") ? string.Empty : row["NAME"].ToString(),
                         Path = row.IsNull("PATH") ? string.Empty : row["PATH"].ToString(),
+                        Parameter = row.IsNull("CS") ? string.Empty : row["CS"].ToString(),
                         Sxh = row.IsNull("SXH") ? 0 : Convert.ToInt32(row["SXH"])
                     })
                     .OrderBy(o => o.Sxh)
@@ -108,6 +111,7 @@ namespace WindowsFormsApp.主窗体
 
                     // 解析并缓存窗体类型
                     ResolveAndCacheFormType(menuInfo.Name, menuInfo.Path);
+                    _menuParameterMap[menuInfo.Name] = menuInfo.Parameter;
                 }
                 tvMenu.Nodes.Add(categoryNode);
                 // 默认展开分类
@@ -207,6 +211,19 @@ namespace WindowsFormsApp.主窗体
             {
                 try
                 {
+                    string menuParameter = _menuParameterMap.TryGetValue(menuName, out string parameter)
+                        ? parameter ?? string.Empty
+                        : string.Empty;
+
+                    // 页面需要菜单参数时，声明 public FormName(string type) 即可接收；
+                    // 页面没有该构造函数时继续使用无参构造。
+                    ConstructorInfo parameterConstructor = formType.GetConstructor(new[] { typeof(string) });
+                    if (parameterConstructor != null)
+                    {
+                        return (Form)parameterConstructor.Invoke(new object[] { menuParameter });
+                    }
+
+                    // 页面不需要菜单参数时，继续使用原有无参构造。
                     return (Form)Activator.CreateInstance(formType);
                 }
                 catch (Exception ex)

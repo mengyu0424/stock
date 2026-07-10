@@ -45,6 +45,7 @@
             this.MENULEVEL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FLAG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PATH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SXH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FATHERSXH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
@@ -157,6 +158,7 @@
             this.MENULEVEL,
             this.FLAG,
             this.PATH,
+            this.CS,
             this.SXH,
             this.FATHERSXH});
             this.dgvMenuList.ConvertValueData = "flag:1-启用*0-停用;";
@@ -241,6 +243,14 @@
             this.PATH.Name = "PATH";
             this.PATH.ReadOnly = true;
             // 
+            // CS
+            // 
+            this.CS.DataPropertyName = "CS";
+            this.CS.FillWeight = 160F;
+            this.CS.HeaderText = "打开参数";
+            this.CS.Name = "CS";
+            this.CS.ReadOnly = true;
+            // 
             // SXH
             // 
             this.SXH.DataPropertyName = "SXH";
@@ -290,6 +300,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MENULEVEL;
         private System.Windows.Forms.DataGridViewTextBoxColumn FLAG;
         private System.Windows.Forms.DataGridViewTextBoxColumn PATH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CS;
         private System.Windows.Forms.DataGridViewTextBoxColumn SXH;
         private System.Windows.Forms.DataGridViewTextBoxColumn FATHERSXH;
     }

@@ -33,12 +33,14 @@
             this.txtPym = new MyTextBox();
             this.txtSxh = new MyTextBox();
             this.txt_url = new MyTextBox();
+            this.txt_cs = new MyTextBox();
             this.cmbFlag = new MyComboBox();
             this.txtMenuName = new MyTextBox();
             this.txtMenuCode = new MyTextBox();
             this.cmbFatherMenu = new MyComboBox();
             this.myLabel8 = new MyLabel();
             this.myLabel6 = new MyLabel();
+            this.myLabel7 = new MyLabel();
             this.myLabel5 = new MyLabel();
             this.myLabel4 = new MyLabel();
             this.myLabel3 = new MyLabel();
@@ -57,12 +59,14 @@
             this.myPanel1.Controls.Add(this.txtPym);
             this.myPanel1.Controls.Add(this.txtSxh);
             this.myPanel1.Controls.Add(this.txt_url);
+            this.myPanel1.Controls.Add(this.txt_cs);
             this.myPanel1.Controls.Add(this.cmbFlag);
             this.myPanel1.Controls.Add(this.txtMenuName);
             this.myPanel1.Controls.Add(this.txtMenuCode);
             this.myPanel1.Controls.Add(this.cmbFatherMenu);
             this.myPanel1.Controls.Add(this.myLabel8);
             this.myPanel1.Controls.Add(this.myLabel6);
+            this.myPanel1.Controls.Add(this.myLabel7);
             this.myPanel1.Controls.Add(this.myLabel5);
             this.myPanel1.Controls.Add(this.myLabel4);
             this.myPanel1.Controls.Add(this.myLabel3);
@@ -71,7 +75,7 @@
             this.myPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.myPanel1.Location = new System.Drawing.Point(0, 0);
             this.myPanel1.Name = "myPanel1";
-            this.myPanel1.Size = new System.Drawing.Size(480, 233);
+            this.myPanel1.Size = new System.Drawing.Size(480, 273);
             this.myPanel1.TabIndex = 1;
             // 
             // txtPym
@@ -104,6 +108,16 @@
             this.txt_url.Name = "txt_url";
             this.txt_url.Size = new System.Drawing.Size(344, 27);
             this.txt_url.TabIndex = 13;
+            // 
+            // txt_cs
+            // 
+            this.txt_cs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_cs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txt_cs.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.txt_cs.Location = new System.Drawing.Point(105, 221);
+            this.txt_cs.Name = "txt_cs";
+            this.txt_cs.Size = new System.Drawing.Size(344, 27);
+            this.txt_cs.TabIndex = 16;
             // 
             // cmbFlag
             // 
@@ -187,6 +201,17 @@
             this.myLabel6.TabIndex = 5;
             this.myLabel6.Text = "菜单地址：";
             // 
+            // myLabel7
+            // 
+            this.myLabel7.AutoSize = true;
+            this.myLabel7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.myLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.myLabel7.Location = new System.Drawing.Point(11, 225);
+            this.myLabel7.Name = "myLabel7";
+            this.myLabel7.Size = new System.Drawing.Size(90, 21);
+            this.myLabel7.TabIndex = 6;
+            this.myLabel7.Text = "打开参数：";
+            // 
             // myLabel5
             // 
             this.myLabel5.AutoSize = true;
@@ -263,7 +288,7 @@
             this.myPanel2.Controls.Add(this.btn_save);
             this.myPanel2.Controls.Add(this.btn_close);
             this.myPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.myPanel2.Location = new System.Drawing.Point(0, 233);
+            this.myPanel2.Location = new System.Drawing.Point(0, 273);
             this.myPanel2.Name = "myPanel2";
             this.myPanel2.Size = new System.Drawing.Size(480, 50);
             this.myPanel2.TabIndex = 2;
@@ -287,7 +312,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 283);
+            this.ClientSize = new System.Drawing.Size(480, 323);
             this.Controls.Add(this.myPanel2);
             this.Controls.Add(this.myPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -309,6 +334,7 @@
         private MyLabel myLabel1;
         private MyLabel myLabel8;
         private MyLabel myLabel6;
+        private MyLabel myLabel7;
         private MyLabel myLabel5;
         private MyLabel myLabel4;
         private MyLabel myLabel3;
@@ -318,6 +344,7 @@
         private MyComboBox cmbFlag;
         private MyTextBox txtMenuName;
         private MyTextBox txt_url;
+        private MyTextBox txt_cs;
         private MyTextBox txtPym;
         private MyTextBox txtSxh;
     }

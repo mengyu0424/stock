@@ -42,17 +42,19 @@ namespace WindowsFormsApp.维护功能
             dt.Columns.Add("flag", typeof(string));
             dt.Columns.Add("sxh", typeof(string));
             dt.Columns.Add("path", typeof(string));
+            dt.Columns.Add("cs", typeof(string));
             dt.Columns.Add("menulevel", typeof(string));
 
             DataRow dr=dt.NewRow();
-            dr["fatherCode"] = data[0].Cells["FATHERCODE"].Value.ToString();
-            dr["menuCode"] = data[0].Cells["CODE"].Value.ToString();
-            dr["menuName"] = data[0].Cells["NAME"].Value.ToString();
-            dr["pym"] = data[0].Cells["PYM"].Value.ToString();
-            dr["flag"] = data[0].Cells["FLAG"].Value.ToString();
-            dr["sxh"] = data[0].Cells["SXH"].Value.ToString();
-            dr["path"] = data[0].Cells["PATH"].Value.ToString();
-            dr["menulevel"] = data[0].Cells["MENULEVEL"].Value.ToString(); 
+            dr["fatherCode"] = data[0].Cells["FATHERCODE"].Value?.ToString() ?? string.Empty;
+            dr["menuCode"] = data[0].Cells["CODE"].Value?.ToString() ?? string.Empty;
+            dr["menuName"] = data[0].Cells["NAME"].Value?.ToString() ?? string.Empty;
+            dr["pym"] = data[0].Cells["PYM"].Value?.ToString() ?? string.Empty;
+            dr["flag"] = data[0].Cells["FLAG"].Value?.ToString() ?? string.Empty;
+            dr["sxh"] = data[0].Cells["SXH"].Value?.ToString() ?? string.Empty;
+            dr["path"] = data[0].Cells["PATH"].Value?.ToString() ?? string.Empty;
+            dr["cs"] = data[0].Cells["CS"].Value?.ToString() ?? string.Empty;
+            dr["menulevel"] = data[0].Cells["MENULEVEL"].Value?.ToString() ?? string.Empty;
             dt.Rows.Add(dr);
 
             MenuEdit menuEdit = new MenuEdit("Edit", dt);
@@ -71,7 +73,7 @@ namespace WindowsFormsApp.维护功能
 
         private DataTable GetMenuData()
         {
-            string sql = string.Format(@"select m.fathercode,n.name fathername,m.code,m.name,m.pym,m.menulevel,m.flag,m.path,m.sxh,nvl(n.sxh,m.sxh) as fathersxh from code_menu m
+            string sql = string.Format(@"select m.fathercode,n.name fathername,m.code,m.name,m.pym,m.menulevel,m.flag,m.path,m.cs,m.sxh,nvl(n.sxh,m.sxh) as fathersxh from code_menu m
                                                                 left join code_menu n on m.fathercode=n.code
                                                                 order by nvl(n.sxh,m.sxh),m.menulevel,m.sxh ");
             return OracleDbHelper.ExecuteQuery(sql);

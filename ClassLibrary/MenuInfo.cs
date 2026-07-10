@@ -26,5 +26,10 @@
         /// 菜单地址
         /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// 打开菜单时传递给窗体的参数
+        /// </summary>
+        public string CS { get; set; }
     }
 }

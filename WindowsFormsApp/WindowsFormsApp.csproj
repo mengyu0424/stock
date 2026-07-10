@@ -319,5 +319,37 @@
     <Content Include="Image\mengyu.png" />
     <Content Include="Image\mengyuLogo.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="维护功能\WpdmSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\WpdmSetting.Designer.cs">
+      <DependentUpon>WpdmSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护功能\WpdmInfoSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\WpdmInfoSetting.Designer.cs">
+      <DependentUpon>WpdmInfoSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="维护功能\WpdmSettingCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="维护功能\WpdmSettingCopy.Designer.cs">
+      <DependentUpon>WpdmSettingCopy.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="维护功能\WpdmSetting.resx">
+      <DependentUpon>WpdmSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\WpdmInfoSetting.resx">
+      <DependentUpon>WpdmInfoSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="维护功能\WpdmSettingCopy.resx">
+      <DependentUpon>WpdmSettingCopy.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="库房业务\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

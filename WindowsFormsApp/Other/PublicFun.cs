@@ -1,7 +1,11 @@
-﻿using TinyPinyin;
+﻿using ClassHelper;
+using Oracle.ManagedDataAccess.Client;
+using System.Data;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
+using System.Xml;
+using TinyPinyin;
 
 namespace WindowsFormsApp.Other
 {
@@ -43,6 +47,45 @@ namespace WindowsFormsApp.Other
                 return "";
             }
             
+        }
+
+        public static int GetSeqBySeqName(string seqName) {
+            try
+            {
+                return int.Parse(OracleDbHelper.ExecuteScalar(string.Format("select {0}.nextval from dual", seqName)).ToString());
+            }
+            catch (System.Exception)
+            {
+                return -1;
+            }
+        }
+        /// <summary>
+        /// 获取字典数据列表
+        /// </summary>
+        /// <param name="typeCode">字典代码</param>
+        /// <param name="isAddAllSel">是否加"ALL"数据，不传则不加</param>
+        /// <param name="defAllText">"ALL"数据的名称，不传则为"全部"</param>
+        /// <returns></returns>
+        public static DataTable GetDictDataList(string typeCode,bool isAddAllSel=false,string defAllText="全部") {
+            string sql = @"select n.code, n.name,n.bz
+                           from code_dict_main m
+                           inner join code_dict_next n on m.code = n.maincode
+                           where m.code = :maincode
+                             and nvl(m.flag, '1') = '1'
+                           order by n.code";
+
+            DataTable dt = OracleDbHelper.ExecuteQuery(
+                sql,
+                new OracleParameter(":maincode", typeCode));
+            if (isAddAllSel)
+            {
+                DataRow row = dt.NewRow();
+                row["CODE"] = "ALL";
+                row["NAME"] = defAllText;
+                row["BZ"] = defAllText;
+                dt.Rows.InsertAt(row, 0);
+            }
+            return dt;
         }
         #endregion
     }
