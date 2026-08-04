@@ -71,7 +71,7 @@ namespace WindowsFormsApp.维护功能
         /// </summary>
         private void MenuAddLoad()
         {
-            txtMenuCode.Text = OracleDbHelper.ExecuteScalar(string.Format("select max(code)+1 code from code_menu")).ToString();
+            txtMenuCode.Text = OracleDbHelper.ExecuteScalar(string.Format("select max(to_number(code))+1 code from code_menu")).ToString();
             priMenuCode = txtMenuCode.Text;
         }
 

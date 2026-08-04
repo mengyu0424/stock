@@ -96,7 +96,7 @@ namespace WindowsFormsApp.维护功能
         {
             if (string.IsNullOrWhiteSpace(selectedUserCode))
             {
-                MessageBox.Show("Please select an operator first.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("请先选择需要维护角色的账号！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -115,7 +115,7 @@ namespace WindowsFormsApp.维护功能
             if (checkedRoleCodes.Count == 0)
             {
                 DialogResult confirmResult = MessageBox.Show(
-                    "No roles are selected. Saving will clear all role assignments for this operator. Continue?",
+                    "没有选择任何角色，这样会清空覆盖原有账号的角色权限，是否继续?",
                     "Confirm",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -141,12 +141,12 @@ namespace WindowsFormsApp.维护功能
                 }
 
                 OracleDbHelper.BatchExecuteNonQuery(sqlList);
-                MessageBox.Show("Save succeeded.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadAssignedRoles(selectedUserCode);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Save failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"保存失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
