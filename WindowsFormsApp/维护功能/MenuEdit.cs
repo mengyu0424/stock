@@ -55,8 +55,17 @@ namespace WindowsFormsApp.维护功能
                 cmbFatherMenu.DisplayMember = "NAME";
                 cmbFatherMenu.ValueMember = "CODE";
             }
+            else
+            {
+                DataTable menuDt = new DataTable();
+                menuDt.Columns.Add("CODE");
+                menuDt.Columns.Add("NAME");
+                cmbFatherMenu.DataSource = menuDt;
+                cmbFatherMenu.DisplayMember = "NAME";
+                cmbFatherMenu.ValueMember = "CODE";
+            }
 
-            cmbFatherMenu.Enabled = true;
+                cmbFatherMenu.Enabled = true;
             txtMenuCode.Enabled = false;
             txtMenuName.Enabled = true;
             txtPym.Enabled = true;

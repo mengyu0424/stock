@@ -243,6 +243,9 @@
     <EmbeddedResource Include="主窗体\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="库房业务\InStorage.resx">
+      <DependentUpon>InStorage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="库房业务\KcStates.resx">
       <DependentUpon>KcStates.cs</DependentUpon>
     </EmbeddedResource>
@@ -358,6 +361,13 @@
     <Compile Include="库房业务\KcStates.Designer.cs">
       <DependentUpon>KcStates.cs</DependentUpon>
     </Compile>
+    <Compile Include="库房业务\InStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="库房业务\InStorage.Designer.cs">
+      <DependentUpon>InStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="库房业务\InStorageValidation.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

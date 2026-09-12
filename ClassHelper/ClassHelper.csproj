@@ -101,6 +101,9 @@
     <Compile Include="控件\MyComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="控件\MyComboList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="控件\MyDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
