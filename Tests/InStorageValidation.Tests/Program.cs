@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.IO;
 using System.Reflection;
 
 internal static class Program
@@ -14,6 +15,7 @@ internal static class Program
             ShouldRejectDuplicateBatchNumbersForTheSameItemAndLot();
             ShouldValidatePricesWithAtMostFourDecimalPlaces();
             ShouldValidatePositiveIntegerQuantities();
+            ShouldConfigureInstallerWithoutOverridingInstallLocation();
             Console.WriteLine("All InStorage validation tests passed.");
             return 0;
         }
@@ -77,6 +79,83 @@ internal static class Program
         AssertFalse(IsPositiveInteger("1.0"), "Decimal quantity should be invalid.");
     }
 
+    private static void ShouldConfigureInstallerWithoutOverridingInstallLocation()
+    {
+        string projectRoot = FindProjectRoot();
+        string installerPath = Directory.GetFiles(projectRoot, "*.vdproj", SearchOption.AllDirectories)[0];
+        string installerProject = File.ReadAllText(installerPath);
+        string solutionProject = File.ReadAllText(
+            Path.Combine(projectRoot, "WindowsFormsApp", "WindowsFormsApp.sln"));
+        string uninstallerPath = Path.Combine(
+            projectRoot,
+            "\u5378\u8f7d\u7a0b\u5e8f",
+            "\u5378\u8f7d\u7a0b\u5e8f.csproj");
+        string uninstallerProgramPath = Path.Combine(
+            projectRoot,
+            "\u5378\u8f7d\u7a0b\u5e8f",
+            "Program.cs");
+        string installerLauncherPath = Path.Combine(
+            projectRoot,
+            "\u5b89\u88c5\u542f\u52a8\u5668",
+            "Program.cs");
+
+        AssertTrue(File.Exists(uninstallerPath), "The uninstaller project should exist.");
+        AssertTrue(File.Exists(uninstallerProgramPath), "The uninstaller program source should exist.");
+        AssertTrue(File.Exists(installerLauncherPath), "The installer launcher source should exist.");
+        AssertTrue(
+            installerProject.Contains(
+                "DefaultLocation\" = \"8:[ProgramFilesFolder][Manufacturer]\\\\[ProductName]"),
+            "The installer should use its standard install location.");
+        AssertTrue(
+            installerProject.Contains("Name\" = \"8:#1925\""),
+            "The installer should retain its standard target directory name.");
+        AssertTrue(
+            installerProject.Contains("<VsdDialogDir>\\\\VsdFolderDlg.wid"),
+            "The installer should let users choose an install folder.");
+        AssertTrue(
+            installerProject.Contains(
+                "SourcePath\" = \"8:..\\\\\u5378\u8f7d\u7a0b\u5e8f\\\\bin\\\\\u5378\u8f7d\u68a6\u5c7f\u8fdb\u9500\u5b58\u7a0b\u5e8f.exe"),
+            "The installer should include the uninstall executable.");
+        AssertTrue(
+            installerProject.Contains(
+                "TargetName\" = \"8:\u5378\u8f7d\u68a6\u5c7f\u8fdb\u9500\u5b58\u7a0b\u5e8f.exe"),
+            "The installer should preserve the uninstall executable name.");
+        AssertTrue(
+            File.ReadAllText(uninstallerProgramPath).Contains(
+                "ProductCode = \"{2AB199DB-01FE-4A39-8FF7-6DE42FA99497}\""),
+            "The uninstall executable should target this MSI product.");
+        string installerLauncher = File.ReadAllText(installerLauncherPath);
+        AssertFalse(
+            installerLauncher.Contains("ROOTDRIVE="),
+            "The installer launcher should not override MSI's install drive.");
+        AssertFalse(
+            installerLauncher.Contains("DriveInfo"),
+            "The installer launcher should not select an install drive.");
+        AssertFalse(
+            installerLauncher.Contains("TARGETDIR="),
+            "The installer launcher should not override MSI's TARGETDIR directory tree.");
+        AssertTrue(
+            solutionProject.Contains(
+                "ProjectSection(ProjectDependencies) = postProject\n\t\t{E8C4E7D8-4C2C-4D03-8B70-AF8137D5E7F4} = {E8C4E7D8-4C2C-4D03-8B70-AF8137D5E7F4}"),
+            "The installer project should build the uninstaller first.");
+    }
+
+    private static string FindProjectRoot()
+    {
+        string directory = AppContext.BaseDirectory;
+        while (!string.IsNullOrEmpty(directory))
+        {
+            if (File.Exists(Path.Combine(directory, "WindowsFormsApp", "WindowsFormsApp.sln")))
+            {
+                return directory;
+            }
+
+            directory = Directory.GetParent(directory)?.FullName;
+        }
+
+        throw new DirectoryNotFoundException("Could not locate the project root.");
+    }
+
     private static DataTable CreateDetails()
     {
         DataTable details = new DataTable();
@@ -108,7 +187,8 @@ internal static class Program
 
     private static object InvokeValidationMethod(string methodName, params object[] arguments)
     {
-        Type validationType = Assembly.GetExecutingAssembly().GetType("WindowsFormsApp.库房业务.InStorageValidation");
+        Type validationType = Assembly.GetExecutingAssembly().GetType(
+            "WindowsFormsApp.\u5e93\u623f\u4e1a\u52a1.InStorageValidation");
         if (validationType == null)
         {
             throw new InvalidOperationException("InStorageValidation is not implemented.");

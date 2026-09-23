@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp", "WindowsF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "..\ClassLibrary\ClassLibrary.csproj", "{6953FFEE-2791-4DD5-B07D-1820AB07429F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "库存进销存程序", "..\库存进销存程序\库存进销存程序.vdproj", "{21B40810-80C3-5DCB-B19B-D3A294BE8E5B}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "梦屿库存管理程序", "..\库存进销存程序\库存进销存程序.vdproj", "{21B40810-80C3-5DCB-B19B-D3A294BE8E5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassHelper", "..\ClassHelper\ClassHelper.csproj", "{6857BCE7-9841-46AE-A085-1A108A7F0159}"
 EndProject

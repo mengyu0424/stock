@@ -11,8 +11,14 @@
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
 "SccProvider" = "8:"
-    "Hierarchy"
-    {
+        "Hierarchy"
+        {
+        "Entry"
+        {
+        "MsmKey" = "8:_A41C9E2D7B344B79A30F5CE9A1D0B8F6"
+        "OwnerKey" = "8:_F4132879A82E4614ABB51F99B57F3911"
+        "MsmSig" = "8:_UNDEFINED"
+        }
         "Entry"
         {
         "MsmKey" = "8:_0581EE6C03A892E17DD791AE3FF8AB73"
@@ -1073,6 +1079,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A41C9E2D7B344B79A30F5CE9A1D0B8F6"
+            {
+            "SourcePath" = "8:..\\卸载程序\\bin\\卸载梦屿进销存程序.exe"
+            "TargetName" = "8:卸载梦屿进销存程序.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_F1D24BF22A50451FB85256FD19C21029"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
