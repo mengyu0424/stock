@@ -29,5 +29,11 @@ namespace WindowsFormsApp.测试菜单
             WindowsFormsApp.测试工具.LotteryForm lotteryForm = new WindowsFormsApp.测试工具.LotteryForm();
             lotteryForm.Show();
         }
+
+        private void btn_file_Click(object sender, EventArgs e)
+        {
+            WindowsFormsApp.测试工具.GetFileForm fileForm = new WindowsFormsApp.测试工具.GetFileForm();
+            fileForm.Show();
+        }
     }
 }

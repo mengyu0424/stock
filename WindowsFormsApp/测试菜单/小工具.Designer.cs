@@ -31,6 +31,7 @@
             this.myButton1 = new MyButton();
             this.btn_redis = new MyButton();
             this.btn_Lottery = new MyButton();
+            this.btn_file = new MyButton();
             this.SuspendLayout();
             // 
             // myButton1
@@ -82,11 +83,27 @@
             this.btn_Lottery.UseVisualStyleBackColor = true;
             this.btn_Lottery.Click += new System.EventHandler(this.btn_Lottery_Click);
             // 
+            // btn_file
+            // 
+            this.btn_file.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_file.FlatAppearance.BorderSize = 0;
+            this.btn_file.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_file.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_file.ForeColor = System.Drawing.Color.White;
+            this.btn_file.Location = new System.Drawing.Point(203, 76);
+            this.btn_file.Name = "btn_file";
+            this.btn_file.Size = new System.Drawing.Size(168, 35);
+            this.btn_file.TabIndex = 3;
+            this.btn_file.Text = "文件提取";
+            this.btn_file.UseVisualStyleBackColor = true;
+            this.btn_file.Click += new System.EventHandler(this.btn_file_Click);
+            // 
             // 小工具
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_file);
             this.Controls.Add(this.btn_Lottery);
             this.Controls.Add(this.btn_redis);
             this.Controls.Add(this.myButton1);
@@ -101,5 +118,6 @@
         private MyButton myButton1;
         private MyButton btn_redis;
         private MyButton btn_Lottery;
+        private MyButton btn_file;
     }
 }

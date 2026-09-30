@@ -134,6 +134,12 @@
     <Compile Include="测试工具\LotteryForm.Designer.cs">
       <DependentUpon>LotteryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="测试工具\GetFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="测试工具\GetFileForm.Designer.cs">
+      <DependentUpon>GetFileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="测试工具\MessageWin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="库房业务\KcStates.resx">
       <DependentUpon>KcStates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="测试工具\GetFileForm.resx">
+      <DependentUpon>GetFileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="测试工具\MessageWin.resx">
       <DependentUpon>MessageWin.cs</DependentUpon>
